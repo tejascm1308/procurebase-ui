@@ -19,10 +19,12 @@ import { Route as AuditorRouteImport } from './routes/auditor'
 import { Route as ApproverRouteImport } from './routes/approver'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorRfqsRouteImport } from './routes/vendor.rfqs'
+import { Route as VendorQuotationsRouteImport } from './routes/vendor.quotations'
 import { Route as VendorDashboardRouteImport } from './routes/vendor.dashboard'
 import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
 import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
 import { Route as SignupMemberRouteImport } from './routes/signup.member'
+import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
 
 const VendorRoute = VendorRouteImport.update({
   id: '/vendor',
@@ -74,6 +76,11 @@ const VendorRfqsRoute = VendorRfqsRouteImport.update({
   path: '/rfqs',
   getParentRoute: () => VendorRoute,
 } as any)
+const VendorQuotationsRoute = VendorQuotationsRouteImport.update({
+  id: '/quotations',
+  path: '/quotations',
+  getParentRoute: () => VendorRoute,
+} as any)
 const VendorDashboardRoute = VendorDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -94,6 +101,11 @@ const SignupMemberRoute = SignupMemberRouteImport.update({
   path: '/signup/member',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendorRfqsIdRoute = VendorRfqsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VendorRfqsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -109,7 +121,9 @@ export interface FileRoutesByFullPath {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
-  '/vendor/rfqs': typeof VendorRfqsRoute
+  '/vendor/quotations': typeof VendorQuotationsRoute
+  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,7 +139,9 @@ export interface FileRoutesByTo {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
-  '/vendor/rfqs': typeof VendorRfqsRoute
+  '/vendor/quotations': typeof VendorQuotationsRoute
+  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,7 +158,9 @@ export interface FileRoutesById {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
-  '/vendor/rfqs': typeof VendorRfqsRoute
+  '/vendor/quotations': typeof VendorQuotationsRoute
+  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,7 +178,9 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/vendor/rfqs/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -176,7 +196,9 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/vendor/rfqs/$id'
   id:
     | '__root__'
     | '/'
@@ -192,7 +214,9 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/vendor/rfqs/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -282,6 +306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorRfqsRouteImport
       parentRoute: typeof VendorRoute
     }
+    '/vendor/quotations': {
+      id: '/vendor/quotations'
+      path: '/quotations'
+      fullPath: '/vendor/quotations'
+      preLoaderRoute: typeof VendorQuotationsRouteImport
+      parentRoute: typeof VendorRoute
+    }
     '/vendor/dashboard': {
       id: '/vendor/dashboard'
       path: '/dashboard'
@@ -310,17 +341,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupMemberRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vendor/rfqs/$id': {
+      id: '/vendor/rfqs/$id'
+      path: '/$id'
+      fullPath: '/vendor/rfqs/$id'
+      preLoaderRoute: typeof VendorRfqsIdRouteImport
+      parentRoute: typeof VendorRfqsRoute
+    }
   }
 }
 
+interface VendorRfqsRouteChildren {
+  VendorRfqsIdRoute: typeof VendorRfqsIdRoute
+}
+
+const VendorRfqsRouteChildren: VendorRfqsRouteChildren = {
+  VendorRfqsIdRoute: VendorRfqsIdRoute,
+}
+
+const VendorRfqsRouteWithChildren = VendorRfqsRoute._addFileChildren(
+  VendorRfqsRouteChildren,
+)
+
 interface VendorRouteChildren {
   VendorDashboardRoute: typeof VendorDashboardRoute
-  VendorRfqsRoute: typeof VendorRfqsRoute
+  VendorQuotationsRoute: typeof VendorQuotationsRoute
+  VendorRfqsRoute: typeof VendorRfqsRouteWithChildren
 }
 
 const VendorRouteChildren: VendorRouteChildren = {
   VendorDashboardRoute: VendorDashboardRoute,
-  VendorRfqsRoute: VendorRfqsRoute,
+  VendorQuotationsRoute: VendorQuotationsRoute,
+  VendorRfqsRoute: VendorRfqsRouteWithChildren,
 }
 
 const VendorRouteWithChildren =
