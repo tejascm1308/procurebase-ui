@@ -27,10 +27,18 @@ import { Route as VendorDashboardRouteImport } from './routes/vendor.dashboard'
 import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
 import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
 import { Route as SignupMemberRouteImport } from './routes/signup.member'
+import { Route as OfficerVendorsRouteImport } from './routes/officer.vendors'
+import { Route as OfficerRfqsRouteImport } from './routes/officer.rfqs'
+import { Route as OfficerNotificationsRouteImport } from './routes/officer.notifications'
+import { Route as OfficerDashboardRouteImport } from './routes/officer.dashboard'
+import { Route as ApproverDashboardRouteImport } from './routes/approver.dashboard'
 import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
 import { Route as VendorQuotationsIdRouteImport } from './routes/vendor.quotations.$id'
 import { Route as VendorProfileCompleteRouteImport } from './routes/vendor.profile.complete'
 import { Route as VendorOrdersIdRouteImport } from './routes/vendor.orders.$id'
+import { Route as OfficerVendorsIdRouteImport } from './routes/officer.vendors.$id'
+import { Route as OfficerRfqsCreateRouteImport } from './routes/officer.rfqs.create'
+import { Route as OfficerRfqsIdRouteImport } from './routes/officer.rfqs.$id'
 
 const VendorRoute = VendorRouteImport.update({
   id: '/vendor',
@@ -122,6 +130,31 @@ const SignupMemberRoute = SignupMemberRouteImport.update({
   path: '/signup/member',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OfficerVendorsRoute = OfficerVendorsRouteImport.update({
+  id: '/vendors',
+  path: '/vendors',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const OfficerRfqsRoute = OfficerRfqsRouteImport.update({
+  id: '/rfqs',
+  path: '/rfqs',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const OfficerNotificationsRoute = OfficerNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const OfficerDashboardRoute = OfficerDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const ApproverDashboardRoute = ApproverDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ApproverRoute,
+} as any)
 const VendorRfqsIdRoute = VendorRfqsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -142,17 +175,37 @@ const VendorOrdersIdRoute = VendorOrdersIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => VendorOrdersRoute,
 } as any)
+const OfficerVendorsIdRoute = OfficerVendorsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OfficerVendorsRoute,
+} as any)
+const OfficerRfqsCreateRoute = OfficerRfqsCreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => OfficerRfqsRoute,
+} as any)
+const OfficerRfqsIdRoute = OfficerRfqsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OfficerRfqsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/approver': typeof ApproverRoute
+  '/approver': typeof ApproverRouteWithChildren
   '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/head': typeof HeadRoute
   '/login': typeof LoginRoute
-  '/officer': typeof OfficerRoute
+  '/officer': typeof OfficerRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/vendor': typeof VendorRouteWithChildren
+  '/approver/dashboard': typeof ApproverDashboardRoute
+  '/officer/dashboard': typeof OfficerDashboardRoute
+  '/officer/notifications': typeof OfficerNotificationsRoute
+  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
+  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
@@ -162,6 +215,9 @@ export interface FileRoutesByFullPath {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
+  '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
+  '/officer/vendors/$id': typeof OfficerVendorsIdRoute
   '/vendor/orders/$id': typeof VendorOrdersIdRoute
   '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
@@ -169,14 +225,19 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/approver': typeof ApproverRoute
+  '/approver': typeof ApproverRouteWithChildren
   '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/head': typeof HeadRoute
   '/login': typeof LoginRoute
-  '/officer': typeof OfficerRoute
+  '/officer': typeof OfficerRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/vendor': typeof VendorRouteWithChildren
+  '/approver/dashboard': typeof ApproverDashboardRoute
+  '/officer/dashboard': typeof OfficerDashboardRoute
+  '/officer/notifications': typeof OfficerNotificationsRoute
+  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
+  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
@@ -186,6 +247,9 @@ export interface FileRoutesByTo {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
+  '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
+  '/officer/vendors/$id': typeof OfficerVendorsIdRoute
   '/vendor/orders/$id': typeof VendorOrdersIdRoute
   '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
@@ -194,14 +258,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/approver': typeof ApproverRoute
+  '/approver': typeof ApproverRouteWithChildren
   '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/head': typeof HeadRoute
   '/login': typeof LoginRoute
-  '/officer': typeof OfficerRoute
+  '/officer': typeof OfficerRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/vendor': typeof VendorRouteWithChildren
+  '/approver/dashboard': typeof ApproverDashboardRoute
+  '/officer/dashboard': typeof OfficerDashboardRoute
+  '/officer/notifications': typeof OfficerNotificationsRoute
+  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
+  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
@@ -211,6 +280,9 @@ export interface FileRoutesById {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
+  '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
+  '/officer/vendors/$id': typeof OfficerVendorsIdRoute
   '/vendor/orders/$id': typeof VendorOrdersIdRoute
   '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
@@ -228,6 +300,11 @@ export interface FileRouteTypes {
     | '/officer'
     | '/reset-password'
     | '/vendor'
+    | '/approver/dashboard'
+    | '/officer/dashboard'
+    | '/officer/notifications'
+    | '/officer/rfqs'
+    | '/officer/vendors'
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
@@ -237,6 +314,9 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/officer/rfqs/$id'
+    | '/officer/rfqs/create'
+    | '/officer/vendors/$id'
     | '/vendor/orders/$id'
     | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
@@ -252,6 +332,11 @@ export interface FileRouteTypes {
     | '/officer'
     | '/reset-password'
     | '/vendor'
+    | '/approver/dashboard'
+    | '/officer/dashboard'
+    | '/officer/notifications'
+    | '/officer/rfqs'
+    | '/officer/vendors'
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
@@ -261,6 +346,9 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/officer/rfqs/$id'
+    | '/officer/rfqs/create'
+    | '/officer/vendors/$id'
     | '/vendor/orders/$id'
     | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
@@ -276,6 +364,11 @@ export interface FileRouteTypes {
     | '/officer'
     | '/reset-password'
     | '/vendor'
+    | '/approver/dashboard'
+    | '/officer/dashboard'
+    | '/officer/notifications'
+    | '/officer/rfqs'
+    | '/officer/vendors'
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
@@ -285,6 +378,9 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/officer/rfqs/$id'
+    | '/officer/rfqs/create'
+    | '/officer/vendors/$id'
     | '/vendor/orders/$id'
     | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
@@ -293,12 +389,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApproverRoute: typeof ApproverRoute
+  ApproverRoute: typeof ApproverRouteWithChildren
   AuditorRoute: typeof AuditorRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   HeadRoute: typeof HeadRoute
   LoginRoute: typeof LoginRoute
-  OfficerRoute: typeof OfficerRoute
+  OfficerRoute: typeof OfficerRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
   VendorRoute: typeof VendorRouteWithChildren
   SignupMemberRoute: typeof SignupMemberRoute
@@ -434,6 +530,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupMemberRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/officer/vendors': {
+      id: '/officer/vendors'
+      path: '/vendors'
+      fullPath: '/officer/vendors'
+      preLoaderRoute: typeof OfficerVendorsRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/officer/rfqs': {
+      id: '/officer/rfqs'
+      path: '/rfqs'
+      fullPath: '/officer/rfqs'
+      preLoaderRoute: typeof OfficerRfqsRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/officer/notifications': {
+      id: '/officer/notifications'
+      path: '/notifications'
+      fullPath: '/officer/notifications'
+      preLoaderRoute: typeof OfficerNotificationsRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/officer/dashboard': {
+      id: '/officer/dashboard'
+      path: '/dashboard'
+      fullPath: '/officer/dashboard'
+      preLoaderRoute: typeof OfficerDashboardRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/approver/dashboard': {
+      id: '/approver/dashboard'
+      path: '/dashboard'
+      fullPath: '/approver/dashboard'
+      preLoaderRoute: typeof ApproverDashboardRouteImport
+      parentRoute: typeof ApproverRoute
+    }
     '/vendor/rfqs/$id': {
       id: '/vendor/rfqs/$id'
       path: '/$id'
@@ -462,8 +593,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorOrdersIdRouteImport
       parentRoute: typeof VendorOrdersRoute
     }
+    '/officer/vendors/$id': {
+      id: '/officer/vendors/$id'
+      path: '/$id'
+      fullPath: '/officer/vendors/$id'
+      preLoaderRoute: typeof OfficerVendorsIdRouteImport
+      parentRoute: typeof OfficerVendorsRoute
+    }
+    '/officer/rfqs/create': {
+      id: '/officer/rfqs/create'
+      path: '/create'
+      fullPath: '/officer/rfqs/create'
+      preLoaderRoute: typeof OfficerRfqsCreateRouteImport
+      parentRoute: typeof OfficerRfqsRoute
+    }
+    '/officer/rfqs/$id': {
+      id: '/officer/rfqs/$id'
+      path: '/$id'
+      fullPath: '/officer/rfqs/$id'
+      preLoaderRoute: typeof OfficerRfqsIdRouteImport
+      parentRoute: typeof OfficerRfqsRoute
+    }
   }
 }
+
+interface ApproverRouteChildren {
+  ApproverDashboardRoute: typeof ApproverDashboardRoute
+}
+
+const ApproverRouteChildren: ApproverRouteChildren = {
+  ApproverDashboardRoute: ApproverDashboardRoute,
+}
+
+const ApproverRouteWithChildren = ApproverRoute._addFileChildren(
+  ApproverRouteChildren,
+)
+
+interface OfficerRfqsRouteChildren {
+  OfficerRfqsIdRoute: typeof OfficerRfqsIdRoute
+  OfficerRfqsCreateRoute: typeof OfficerRfqsCreateRoute
+}
+
+const OfficerRfqsRouteChildren: OfficerRfqsRouteChildren = {
+  OfficerRfqsIdRoute: OfficerRfqsIdRoute,
+  OfficerRfqsCreateRoute: OfficerRfqsCreateRoute,
+}
+
+const OfficerRfqsRouteWithChildren = OfficerRfqsRoute._addFileChildren(
+  OfficerRfqsRouteChildren,
+)
+
+interface OfficerVendorsRouteChildren {
+  OfficerVendorsIdRoute: typeof OfficerVendorsIdRoute
+}
+
+const OfficerVendorsRouteChildren: OfficerVendorsRouteChildren = {
+  OfficerVendorsIdRoute: OfficerVendorsIdRoute,
+}
+
+const OfficerVendorsRouteWithChildren = OfficerVendorsRoute._addFileChildren(
+  OfficerVendorsRouteChildren,
+)
+
+interface OfficerRouteChildren {
+  OfficerDashboardRoute: typeof OfficerDashboardRoute
+  OfficerNotificationsRoute: typeof OfficerNotificationsRoute
+  OfficerRfqsRoute: typeof OfficerRfqsRouteWithChildren
+  OfficerVendorsRoute: typeof OfficerVendorsRouteWithChildren
+}
+
+const OfficerRouteChildren: OfficerRouteChildren = {
+  OfficerDashboardRoute: OfficerDashboardRoute,
+  OfficerNotificationsRoute: OfficerNotificationsRoute,
+  OfficerRfqsRoute: OfficerRfqsRouteWithChildren,
+  OfficerVendorsRoute: OfficerVendorsRouteWithChildren,
+}
+
+const OfficerRouteWithChildren =
+  OfficerRoute._addFileChildren(OfficerRouteChildren)
 
 interface VendorOrdersRouteChildren {
   VendorOrdersIdRoute: typeof VendorOrdersIdRoute
@@ -535,12 +742,12 @@ const VendorRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApproverRoute: ApproverRoute,
+  ApproverRoute: ApproverRouteWithChildren,
   AuditorRoute: AuditorRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   HeadRoute: HeadRoute,
   LoginRoute: LoginRoute,
-  OfficerRoute: OfficerRoute,
+  OfficerRoute: OfficerRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,
   VendorRoute: VendorRouteWithChildren,
   SignupMemberRoute: SignupMemberRoute,
