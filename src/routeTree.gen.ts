@@ -9,12 +9,39 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VendorRouteImport } from './routes/vendor'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as OfficerRouteImport } from './routes/officer'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
+import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
+import { Route as SignupMemberRouteImport } from './routes/signup.member'
 
+const VendorRoute = VendorRouteImport.update({
+  id: '/vendor',
+  path: '/vendor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfficerRoute = OfficerRouteImport.update({
+  id: '/officer',
+  path: '/officer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,40 +49,139 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignupVendorRoute = SignupVendorRouteImport.update({
+  id: '/signup/vendor',
+  path: '/signup/vendor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupOrganizationRoute = SignupOrganizationRouteImport.update({
+  id: '/signup/organization',
+  path: '/signup/organization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupMemberRoute = SignupMemberRouteImport.update({
+  id: '/signup/member',
+  path: '/signup/member',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/officer': typeof OfficerRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/vendor': typeof VendorRoute
+  '/signup/member': typeof SignupMemberRoute
+  '/signup/organization': typeof SignupOrganizationRoute
+  '/signup/vendor': typeof SignupVendorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/officer': typeof OfficerRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/vendor': typeof VendorRoute
+  '/signup/member': typeof SignupMemberRoute
+  '/signup/organization': typeof SignupOrganizationRoute
+  '/signup/vendor': typeof SignupVendorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/officer': typeof OfficerRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/vendor': typeof VendorRoute
+  '/signup/member': typeof SignupMemberRoute
+  '/signup/organization': typeof SignupOrganizationRoute
+  '/signup/vendor': typeof SignupVendorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/officer'
+    | '/reset-password'
+    | '/vendor'
+    | '/signup/member'
+    | '/signup/organization'
+    | '/signup/vendor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/officer'
+    | '/reset-password'
+    | '/vendor'
+    | '/signup/member'
+    | '/signup/organization'
+    | '/signup/vendor'
+  id:
+    | '__root__'
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/officer'
+    | '/reset-password'
+    | '/vendor'
+    | '/signup/member'
+    | '/signup/organization'
+    | '/signup/vendor'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
+  OfficerRoute: typeof OfficerRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  VendorRoute: typeof VendorRoute
+  SignupMemberRoute: typeof SignupMemberRoute
+  SignupOrganizationRoute: typeof SignupOrganizationRoute
+  SignupVendorRoute: typeof SignupVendorRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vendor': {
+      id: '/vendor'
+      path: '/vendor'
+      fullPath: '/vendor'
+      preLoaderRoute: typeof VendorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/officer': {
+      id: '/officer'
+      path: '/officer'
+      fullPath: '/officer'
+      preLoaderRoute: typeof OfficerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -65,12 +191,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signup/vendor': {
+      id: '/signup/vendor'
+      path: '/signup/vendor'
+      fullPath: '/signup/vendor'
+      preLoaderRoute: typeof SignupVendorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup/organization': {
+      id: '/signup/organization'
+      path: '/signup/organization'
+      fullPath: '/signup/organization'
+      preLoaderRoute: typeof SignupOrganizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup/member': {
+      id: '/signup/member'
+      path: '/signup/member'
+      fullPath: '/signup/member'
+      preLoaderRoute: typeof SignupMemberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
+  OfficerRoute: OfficerRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  VendorRoute: VendorRoute,
+  SignupMemberRoute: SignupMemberRoute,
+  SignupOrganizationRoute: SignupOrganizationRoute,
+  SignupVendorRoute: SignupVendorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
