@@ -9,38 +9,517 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VendorRouteImport } from './routes/vendor'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as OfficerRouteImport } from './routes/officer'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as HeadRouteImport } from './routes/head'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as AuditorRouteImport } from './routes/auditor'
+import { Route as ApproverRouteImport } from './routes/approver'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendorRfqsRouteImport } from './routes/vendor.rfqs'
+import { Route as VendorQuotationsRouteImport } from './routes/vendor.quotations'
+import { Route as VendorProfileRouteImport } from './routes/vendor.profile'
+import { Route as VendorOrdersRouteImport } from './routes/vendor.orders'
+import { Route as VendorNotificationsRouteImport } from './routes/vendor.notifications'
+import { Route as VendorDashboardRouteImport } from './routes/vendor.dashboard'
+import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
+import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
+import { Route as SignupMemberRouteImport } from './routes/signup.member'
+import { Route as OfficerVendorsRouteImport } from './routes/officer.vendors'
+import { Route as OfficerRfqsRouteImport } from './routes/officer.rfqs'
+import { Route as OfficerNotificationsRouteImport } from './routes/officer.notifications'
+import { Route as OfficerDashboardRouteImport } from './routes/officer.dashboard'
+import { Route as ApproverPendingRouteImport } from './routes/approver.pending'
+import { Route as ApproverNotificationsRouteImport } from './routes/approver.notifications'
+import { Route as ApproverHistoryRouteImport } from './routes/approver.history'
+import { Route as ApproverEscalationsRouteImport } from './routes/approver.escalations'
+import { Route as ApproverDashboardRouteImport } from './routes/approver.dashboard'
+import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
+import { Route as VendorQuotationsIdRouteImport } from './routes/vendor.quotations.$id'
+import { Route as VendorProfileCompleteRouteImport } from './routes/vendor.profile.complete'
+import { Route as VendorOrdersIdRouteImport } from './routes/vendor.orders.$id'
+import { Route as OfficerVendorsIdRouteImport } from './routes/officer.vendors.$id'
+import { Route as OfficerRfqsCreateRouteImport } from './routes/officer.rfqs.create'
+import { Route as OfficerRfqsIdRouteImport } from './routes/officer.rfqs.$id'
+import { Route as ApproverCompareRfqIdRouteImport } from './routes/approver.compare.$rfqId'
 
+const VendorRoute = VendorRouteImport.update({
+  id: '/vendor',
+  path: '/vendor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfficerRoute = OfficerRouteImport.update({
+  id: '/officer',
+  path: '/officer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeadRoute = HeadRouteImport.update({
+  id: '/head',
+  path: '/head',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditorRoute = AuditorRouteImport.update({
+  id: '/auditor',
+  path: '/auditor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApproverRoute = ApproverRouteImport.update({
+  id: '/approver',
+  path: '/approver',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendorRfqsRoute = VendorRfqsRouteImport.update({
+  id: '/rfqs',
+  path: '/rfqs',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorQuotationsRoute = VendorQuotationsRouteImport.update({
+  id: '/quotations',
+  path: '/quotations',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorProfileRoute = VendorProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorOrdersRoute = VendorOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorNotificationsRoute = VendorNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorDashboardRoute = VendorDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => VendorRoute,
+} as any)
+const SignupVendorRoute = SignupVendorRouteImport.update({
+  id: '/signup/vendor',
+  path: '/signup/vendor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupOrganizationRoute = SignupOrganizationRouteImport.update({
+  id: '/signup/organization',
+  path: '/signup/organization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupMemberRoute = SignupMemberRouteImport.update({
+  id: '/signup/member',
+  path: '/signup/member',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfficerVendorsRoute = OfficerVendorsRouteImport.update({
+  id: '/vendors',
+  path: '/vendors',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const OfficerRfqsRoute = OfficerRfqsRouteImport.update({
+  id: '/rfqs',
+  path: '/rfqs',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const OfficerNotificationsRoute = OfficerNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const OfficerDashboardRoute = OfficerDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => OfficerRoute,
+} as any)
+const ApproverPendingRoute = ApproverPendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverNotificationsRoute = ApproverNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverHistoryRoute = ApproverHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverEscalationsRoute = ApproverEscalationsRouteImport.update({
+  id: '/escalations',
+  path: '/escalations',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverDashboardRoute = ApproverDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const VendorRfqsIdRoute = VendorRfqsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VendorRfqsRoute,
+} as any)
+const VendorQuotationsIdRoute = VendorQuotationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VendorQuotationsRoute,
+} as any)
+const VendorProfileCompleteRoute = VendorProfileCompleteRouteImport.update({
+  id: '/complete',
+  path: '/complete',
+  getParentRoute: () => VendorProfileRoute,
+} as any)
+const VendorOrdersIdRoute = VendorOrdersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VendorOrdersRoute,
+} as any)
+const OfficerVendorsIdRoute = OfficerVendorsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OfficerVendorsRoute,
+} as any)
+const OfficerRfqsCreateRoute = OfficerRfqsCreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => OfficerRfqsRoute,
+} as any)
+const OfficerRfqsIdRoute = OfficerRfqsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OfficerRfqsRoute,
+} as any)
+const ApproverCompareRfqIdRoute = ApproverCompareRfqIdRouteImport.update({
+  id: '/compare/$rfqId',
+  path: '/compare/$rfqId',
+  getParentRoute: () => ApproverRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/approver': typeof ApproverRouteWithChildren
+  '/auditor': typeof AuditorRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/head': typeof HeadRoute
+  '/login': typeof LoginRoute
+  '/officer': typeof OfficerRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
+  '/vendor': typeof VendorRouteWithChildren
+  '/approver/dashboard': typeof ApproverDashboardRoute
+  '/approver/escalations': typeof ApproverEscalationsRoute
+  '/approver/history': typeof ApproverHistoryRoute
+  '/approver/notifications': typeof ApproverNotificationsRoute
+  '/approver/pending': typeof ApproverPendingRoute
+  '/officer/dashboard': typeof OfficerDashboardRoute
+  '/officer/notifications': typeof OfficerNotificationsRoute
+  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
+  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
+  '/signup/member': typeof SignupMemberRoute
+  '/signup/organization': typeof SignupOrganizationRoute
+  '/signup/vendor': typeof SignupVendorRoute
+  '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/notifications': typeof VendorNotificationsRoute
+  '/vendor/orders': typeof VendorOrdersRouteWithChildren
+  '/vendor/profile': typeof VendorProfileRouteWithChildren
+  '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
+  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
+  '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
+  '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
+  '/officer/vendors/$id': typeof OfficerVendorsIdRoute
+  '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/profile/complete': typeof VendorProfileCompleteRoute
+  '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
+  '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/approver': typeof ApproverRouteWithChildren
+  '/auditor': typeof AuditorRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/head': typeof HeadRoute
+  '/login': typeof LoginRoute
+  '/officer': typeof OfficerRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
+  '/vendor': typeof VendorRouteWithChildren
+  '/approver/dashboard': typeof ApproverDashboardRoute
+  '/approver/escalations': typeof ApproverEscalationsRoute
+  '/approver/history': typeof ApproverHistoryRoute
+  '/approver/notifications': typeof ApproverNotificationsRoute
+  '/approver/pending': typeof ApproverPendingRoute
+  '/officer/dashboard': typeof OfficerDashboardRoute
+  '/officer/notifications': typeof OfficerNotificationsRoute
+  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
+  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
+  '/signup/member': typeof SignupMemberRoute
+  '/signup/organization': typeof SignupOrganizationRoute
+  '/signup/vendor': typeof SignupVendorRoute
+  '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/notifications': typeof VendorNotificationsRoute
+  '/vendor/orders': typeof VendorOrdersRouteWithChildren
+  '/vendor/profile': typeof VendorProfileRouteWithChildren
+  '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
+  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
+  '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
+  '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
+  '/officer/vendors/$id': typeof OfficerVendorsIdRoute
+  '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/profile/complete': typeof VendorProfileCompleteRoute
+  '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
+  '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/approver': typeof ApproverRouteWithChildren
+  '/auditor': typeof AuditorRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/head': typeof HeadRoute
+  '/login': typeof LoginRoute
+  '/officer': typeof OfficerRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
+  '/vendor': typeof VendorRouteWithChildren
+  '/approver/dashboard': typeof ApproverDashboardRoute
+  '/approver/escalations': typeof ApproverEscalationsRoute
+  '/approver/history': typeof ApproverHistoryRoute
+  '/approver/notifications': typeof ApproverNotificationsRoute
+  '/approver/pending': typeof ApproverPendingRoute
+  '/officer/dashboard': typeof OfficerDashboardRoute
+  '/officer/notifications': typeof OfficerNotificationsRoute
+  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
+  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
+  '/signup/member': typeof SignupMemberRoute
+  '/signup/organization': typeof SignupOrganizationRoute
+  '/signup/vendor': typeof SignupVendorRoute
+  '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/notifications': typeof VendorNotificationsRoute
+  '/vendor/orders': typeof VendorOrdersRouteWithChildren
+  '/vendor/profile': typeof VendorProfileRouteWithChildren
+  '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
+  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
+  '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
+  '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
+  '/officer/vendors/$id': typeof OfficerVendorsIdRoute
+  '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/profile/complete': typeof VendorProfileCompleteRoute
+  '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
+  '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/approver'
+    | '/auditor'
+    | '/forgot-password'
+    | '/head'
+    | '/login'
+    | '/officer'
+    | '/reset-password'
+    | '/vendor'
+    | '/approver/dashboard'
+    | '/approver/escalations'
+    | '/approver/history'
+    | '/approver/notifications'
+    | '/approver/pending'
+    | '/officer/dashboard'
+    | '/officer/notifications'
+    | '/officer/rfqs'
+    | '/officer/vendors'
+    | '/signup/member'
+    | '/signup/organization'
+    | '/signup/vendor'
+    | '/vendor/dashboard'
+    | '/vendor/notifications'
+    | '/vendor/orders'
+    | '/vendor/profile'
+    | '/vendor/quotations'
+    | '/vendor/rfqs'
+    | '/approver/compare/$rfqId'
+    | '/officer/rfqs/$id'
+    | '/officer/rfqs/create'
+    | '/officer/vendors/$id'
+    | '/vendor/orders/$id'
+    | '/vendor/profile/complete'
+    | '/vendor/quotations/$id'
+    | '/vendor/rfqs/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/approver'
+    | '/auditor'
+    | '/forgot-password'
+    | '/head'
+    | '/login'
+    | '/officer'
+    | '/reset-password'
+    | '/vendor'
+    | '/approver/dashboard'
+    | '/approver/escalations'
+    | '/approver/history'
+    | '/approver/notifications'
+    | '/approver/pending'
+    | '/officer/dashboard'
+    | '/officer/notifications'
+    | '/officer/rfqs'
+    | '/officer/vendors'
+    | '/signup/member'
+    | '/signup/organization'
+    | '/signup/vendor'
+    | '/vendor/dashboard'
+    | '/vendor/notifications'
+    | '/vendor/orders'
+    | '/vendor/profile'
+    | '/vendor/quotations'
+    | '/vendor/rfqs'
+    | '/approver/compare/$rfqId'
+    | '/officer/rfqs/$id'
+    | '/officer/rfqs/create'
+    | '/officer/vendors/$id'
+    | '/vendor/orders/$id'
+    | '/vendor/profile/complete'
+    | '/vendor/quotations/$id'
+    | '/vendor/rfqs/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/approver'
+    | '/auditor'
+    | '/forgot-password'
+    | '/head'
+    | '/login'
+    | '/officer'
+    | '/reset-password'
+    | '/vendor'
+    | '/approver/dashboard'
+    | '/approver/escalations'
+    | '/approver/history'
+    | '/approver/notifications'
+    | '/approver/pending'
+    | '/officer/dashboard'
+    | '/officer/notifications'
+    | '/officer/rfqs'
+    | '/officer/vendors'
+    | '/signup/member'
+    | '/signup/organization'
+    | '/signup/vendor'
+    | '/vendor/dashboard'
+    | '/vendor/notifications'
+    | '/vendor/orders'
+    | '/vendor/profile'
+    | '/vendor/quotations'
+    | '/vendor/rfqs'
+    | '/approver/compare/$rfqId'
+    | '/officer/rfqs/$id'
+    | '/officer/rfqs/create'
+    | '/officer/vendors/$id'
+    | '/vendor/orders/$id'
+    | '/vendor/profile/complete'
+    | '/vendor/quotations/$id'
+    | '/vendor/rfqs/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApproverRoute: typeof ApproverRouteWithChildren
+  AuditorRoute: typeof AuditorRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  HeadRoute: typeof HeadRoute
+  LoginRoute: typeof LoginRoute
+  OfficerRoute: typeof OfficerRouteWithChildren
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  VendorRoute: typeof VendorRouteWithChildren
+  SignupMemberRoute: typeof SignupMemberRoute
+  SignupOrganizationRoute: typeof SignupOrganizationRoute
+  SignupVendorRoute: typeof SignupVendorRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vendor': {
+      id: '/vendor'
+      path: '/vendor'
+      fullPath: '/vendor'
+      preLoaderRoute: typeof VendorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/officer': {
+      id: '/officer'
+      path: '/officer'
+      fullPath: '/officer'
+      preLoaderRoute: typeof OfficerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/head': {
+      id: '/head'
+      path: '/head'
+      fullPath: '/head'
+      preLoaderRoute: typeof HeadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auditor': {
+      id: '/auditor'
+      path: '/auditor'
+      fullPath: '/auditor'
+      preLoaderRoute: typeof AuditorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approver': {
+      id: '/approver'
+      path: '/approver'
+      fullPath: '/approver'
+      preLoaderRoute: typeof ApproverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +527,337 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vendor/rfqs': {
+      id: '/vendor/rfqs'
+      path: '/rfqs'
+      fullPath: '/vendor/rfqs'
+      preLoaderRoute: typeof VendorRfqsRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/quotations': {
+      id: '/vendor/quotations'
+      path: '/quotations'
+      fullPath: '/vendor/quotations'
+      preLoaderRoute: typeof VendorQuotationsRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/profile': {
+      id: '/vendor/profile'
+      path: '/profile'
+      fullPath: '/vendor/profile'
+      preLoaderRoute: typeof VendorProfileRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/orders': {
+      id: '/vendor/orders'
+      path: '/orders'
+      fullPath: '/vendor/orders'
+      preLoaderRoute: typeof VendorOrdersRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/notifications': {
+      id: '/vendor/notifications'
+      path: '/notifications'
+      fullPath: '/vendor/notifications'
+      preLoaderRoute: typeof VendorNotificationsRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/dashboard': {
+      id: '/vendor/dashboard'
+      path: '/dashboard'
+      fullPath: '/vendor/dashboard'
+      preLoaderRoute: typeof VendorDashboardRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/signup/vendor': {
+      id: '/signup/vendor'
+      path: '/signup/vendor'
+      fullPath: '/signup/vendor'
+      preLoaderRoute: typeof SignupVendorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup/organization': {
+      id: '/signup/organization'
+      path: '/signup/organization'
+      fullPath: '/signup/organization'
+      preLoaderRoute: typeof SignupOrganizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup/member': {
+      id: '/signup/member'
+      path: '/signup/member'
+      fullPath: '/signup/member'
+      preLoaderRoute: typeof SignupMemberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/officer/vendors': {
+      id: '/officer/vendors'
+      path: '/vendors'
+      fullPath: '/officer/vendors'
+      preLoaderRoute: typeof OfficerVendorsRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/officer/rfqs': {
+      id: '/officer/rfqs'
+      path: '/rfqs'
+      fullPath: '/officer/rfqs'
+      preLoaderRoute: typeof OfficerRfqsRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/officer/notifications': {
+      id: '/officer/notifications'
+      path: '/notifications'
+      fullPath: '/officer/notifications'
+      preLoaderRoute: typeof OfficerNotificationsRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/officer/dashboard': {
+      id: '/officer/dashboard'
+      path: '/dashboard'
+      fullPath: '/officer/dashboard'
+      preLoaderRoute: typeof OfficerDashboardRouteImport
+      parentRoute: typeof OfficerRoute
+    }
+    '/approver/pending': {
+      id: '/approver/pending'
+      path: '/pending'
+      fullPath: '/approver/pending'
+      preLoaderRoute: typeof ApproverPendingRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/notifications': {
+      id: '/approver/notifications'
+      path: '/notifications'
+      fullPath: '/approver/notifications'
+      preLoaderRoute: typeof ApproverNotificationsRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/history': {
+      id: '/approver/history'
+      path: '/history'
+      fullPath: '/approver/history'
+      preLoaderRoute: typeof ApproverHistoryRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/escalations': {
+      id: '/approver/escalations'
+      path: '/escalations'
+      fullPath: '/approver/escalations'
+      preLoaderRoute: typeof ApproverEscalationsRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/dashboard': {
+      id: '/approver/dashboard'
+      path: '/dashboard'
+      fullPath: '/approver/dashboard'
+      preLoaderRoute: typeof ApproverDashboardRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/vendor/rfqs/$id': {
+      id: '/vendor/rfqs/$id'
+      path: '/$id'
+      fullPath: '/vendor/rfqs/$id'
+      preLoaderRoute: typeof VendorRfqsIdRouteImport
+      parentRoute: typeof VendorRfqsRoute
+    }
+    '/vendor/quotations/$id': {
+      id: '/vendor/quotations/$id'
+      path: '/$id'
+      fullPath: '/vendor/quotations/$id'
+      preLoaderRoute: typeof VendorQuotationsIdRouteImport
+      parentRoute: typeof VendorQuotationsRoute
+    }
+    '/vendor/profile/complete': {
+      id: '/vendor/profile/complete'
+      path: '/complete'
+      fullPath: '/vendor/profile/complete'
+      preLoaderRoute: typeof VendorProfileCompleteRouteImport
+      parentRoute: typeof VendorProfileRoute
+    }
+    '/vendor/orders/$id': {
+      id: '/vendor/orders/$id'
+      path: '/$id'
+      fullPath: '/vendor/orders/$id'
+      preLoaderRoute: typeof VendorOrdersIdRouteImport
+      parentRoute: typeof VendorOrdersRoute
+    }
+    '/officer/vendors/$id': {
+      id: '/officer/vendors/$id'
+      path: '/$id'
+      fullPath: '/officer/vendors/$id'
+      preLoaderRoute: typeof OfficerVendorsIdRouteImport
+      parentRoute: typeof OfficerVendorsRoute
+    }
+    '/officer/rfqs/create': {
+      id: '/officer/rfqs/create'
+      path: '/create'
+      fullPath: '/officer/rfqs/create'
+      preLoaderRoute: typeof OfficerRfqsCreateRouteImport
+      parentRoute: typeof OfficerRfqsRoute
+    }
+    '/officer/rfqs/$id': {
+      id: '/officer/rfqs/$id'
+      path: '/$id'
+      fullPath: '/officer/rfqs/$id'
+      preLoaderRoute: typeof OfficerRfqsIdRouteImport
+      parentRoute: typeof OfficerRfqsRoute
+    }
+    '/approver/compare/$rfqId': {
+      id: '/approver/compare/$rfqId'
+      path: '/compare/$rfqId'
+      fullPath: '/approver/compare/$rfqId'
+      preLoaderRoute: typeof ApproverCompareRfqIdRouteImport
+      parentRoute: typeof ApproverRoute
+    }
   }
 }
 
+interface ApproverRouteChildren {
+  ApproverDashboardRoute: typeof ApproverDashboardRoute
+  ApproverEscalationsRoute: typeof ApproverEscalationsRoute
+  ApproverHistoryRoute: typeof ApproverHistoryRoute
+  ApproverNotificationsRoute: typeof ApproverNotificationsRoute
+  ApproverPendingRoute: typeof ApproverPendingRoute
+  ApproverCompareRfqIdRoute: typeof ApproverCompareRfqIdRoute
+}
+
+const ApproverRouteChildren: ApproverRouteChildren = {
+  ApproverDashboardRoute: ApproverDashboardRoute,
+  ApproverEscalationsRoute: ApproverEscalationsRoute,
+  ApproverHistoryRoute: ApproverHistoryRoute,
+  ApproverNotificationsRoute: ApproverNotificationsRoute,
+  ApproverPendingRoute: ApproverPendingRoute,
+  ApproverCompareRfqIdRoute: ApproverCompareRfqIdRoute,
+}
+
+const ApproverRouteWithChildren = ApproverRoute._addFileChildren(
+  ApproverRouteChildren,
+)
+
+interface OfficerRfqsRouteChildren {
+  OfficerRfqsIdRoute: typeof OfficerRfqsIdRoute
+  OfficerRfqsCreateRoute: typeof OfficerRfqsCreateRoute
+}
+
+const OfficerRfqsRouteChildren: OfficerRfqsRouteChildren = {
+  OfficerRfqsIdRoute: OfficerRfqsIdRoute,
+  OfficerRfqsCreateRoute: OfficerRfqsCreateRoute,
+}
+
+const OfficerRfqsRouteWithChildren = OfficerRfqsRoute._addFileChildren(
+  OfficerRfqsRouteChildren,
+)
+
+interface OfficerVendorsRouteChildren {
+  OfficerVendorsIdRoute: typeof OfficerVendorsIdRoute
+}
+
+const OfficerVendorsRouteChildren: OfficerVendorsRouteChildren = {
+  OfficerVendorsIdRoute: OfficerVendorsIdRoute,
+}
+
+const OfficerVendorsRouteWithChildren = OfficerVendorsRoute._addFileChildren(
+  OfficerVendorsRouteChildren,
+)
+
+interface OfficerRouteChildren {
+  OfficerDashboardRoute: typeof OfficerDashboardRoute
+  OfficerNotificationsRoute: typeof OfficerNotificationsRoute
+  OfficerRfqsRoute: typeof OfficerRfqsRouteWithChildren
+  OfficerVendorsRoute: typeof OfficerVendorsRouteWithChildren
+}
+
+const OfficerRouteChildren: OfficerRouteChildren = {
+  OfficerDashboardRoute: OfficerDashboardRoute,
+  OfficerNotificationsRoute: OfficerNotificationsRoute,
+  OfficerRfqsRoute: OfficerRfqsRouteWithChildren,
+  OfficerVendorsRoute: OfficerVendorsRouteWithChildren,
+}
+
+const OfficerRouteWithChildren =
+  OfficerRoute._addFileChildren(OfficerRouteChildren)
+
+interface VendorOrdersRouteChildren {
+  VendorOrdersIdRoute: typeof VendorOrdersIdRoute
+}
+
+const VendorOrdersRouteChildren: VendorOrdersRouteChildren = {
+  VendorOrdersIdRoute: VendorOrdersIdRoute,
+}
+
+const VendorOrdersRouteWithChildren = VendorOrdersRoute._addFileChildren(
+  VendorOrdersRouteChildren,
+)
+
+interface VendorProfileRouteChildren {
+  VendorProfileCompleteRoute: typeof VendorProfileCompleteRoute
+}
+
+const VendorProfileRouteChildren: VendorProfileRouteChildren = {
+  VendorProfileCompleteRoute: VendorProfileCompleteRoute,
+}
+
+const VendorProfileRouteWithChildren = VendorProfileRoute._addFileChildren(
+  VendorProfileRouteChildren,
+)
+
+interface VendorQuotationsRouteChildren {
+  VendorQuotationsIdRoute: typeof VendorQuotationsIdRoute
+}
+
+const VendorQuotationsRouteChildren: VendorQuotationsRouteChildren = {
+  VendorQuotationsIdRoute: VendorQuotationsIdRoute,
+}
+
+const VendorQuotationsRouteWithChildren =
+  VendorQuotationsRoute._addFileChildren(VendorQuotationsRouteChildren)
+
+interface VendorRfqsRouteChildren {
+  VendorRfqsIdRoute: typeof VendorRfqsIdRoute
+}
+
+const VendorRfqsRouteChildren: VendorRfqsRouteChildren = {
+  VendorRfqsIdRoute: VendorRfqsIdRoute,
+}
+
+const VendorRfqsRouteWithChildren = VendorRfqsRoute._addFileChildren(
+  VendorRfqsRouteChildren,
+)
+
+interface VendorRouteChildren {
+  VendorDashboardRoute: typeof VendorDashboardRoute
+  VendorNotificationsRoute: typeof VendorNotificationsRoute
+  VendorOrdersRoute: typeof VendorOrdersRouteWithChildren
+  VendorProfileRoute: typeof VendorProfileRouteWithChildren
+  VendorQuotationsRoute: typeof VendorQuotationsRouteWithChildren
+  VendorRfqsRoute: typeof VendorRfqsRouteWithChildren
+}
+
+const VendorRouteChildren: VendorRouteChildren = {
+  VendorDashboardRoute: VendorDashboardRoute,
+  VendorNotificationsRoute: VendorNotificationsRoute,
+  VendorOrdersRoute: VendorOrdersRouteWithChildren,
+  VendorProfileRoute: VendorProfileRouteWithChildren,
+  VendorQuotationsRoute: VendorQuotationsRouteWithChildren,
+  VendorRfqsRoute: VendorRfqsRouteWithChildren,
+}
+
+const VendorRouteWithChildren =
+  VendorRoute._addFileChildren(VendorRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApproverRoute: ApproverRouteWithChildren,
+  AuditorRoute: AuditorRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  HeadRoute: HeadRoute,
+  LoginRoute: LoginRoute,
+  OfficerRoute: OfficerRouteWithChildren,
+  ResetPasswordRoute: ResetPasswordRoute,
+  VendorRoute: VendorRouteWithChildren,
+  SignupMemberRoute: SignupMemberRoute,
+  SignupOrganizationRoute: SignupOrganizationRoute,
+  SignupVendorRoute: SignupVendorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
