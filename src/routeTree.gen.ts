@@ -13,8 +13,13 @@ import { Route as VendorRouteImport } from './routes/vendor'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as OfficerRouteImport } from './routes/officer'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as HeadRouteImport } from './routes/head'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as AuditorRouteImport } from './routes/auditor'
+import { Route as ApproverRouteImport } from './routes/approver'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendorRfqsRouteImport } from './routes/vendor.rfqs'
+import { Route as VendorDashboardRouteImport } from './routes/vendor.dashboard'
 import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
 import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
 import { Route as SignupMemberRouteImport } from './routes/signup.member'
@@ -39,15 +44,40 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HeadRoute = HeadRouteImport.update({
+  id: '/head',
+  path: '/head',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditorRoute = AuditorRouteImport.update({
+  id: '/auditor',
+  path: '/auditor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApproverRoute = ApproverRouteImport.update({
+  id: '/approver',
+  path: '/approver',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const VendorRfqsRoute = VendorRfqsRouteImport.update({
+  id: '/rfqs',
+  path: '/rfqs',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorDashboardRoute = VendorDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => VendorRoute,
 } as any)
 const SignupVendorRoute = SignupVendorRouteImport.update({
   id: '/signup/vendor',
@@ -67,43 +97,61 @@ const SignupMemberRoute = SignupMemberRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/approver': typeof ApproverRoute
+  '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/head': typeof HeadRoute
   '/login': typeof LoginRoute
   '/officer': typeof OfficerRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/vendor': typeof VendorRoute
+  '/vendor': typeof VendorRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
+  '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/rfqs': typeof VendorRfqsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/approver': typeof ApproverRoute
+  '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/head': typeof HeadRoute
   '/login': typeof LoginRoute
   '/officer': typeof OfficerRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/vendor': typeof VendorRoute
+  '/vendor': typeof VendorRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
+  '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/rfqs': typeof VendorRfqsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/approver': typeof ApproverRoute
+  '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/head': typeof HeadRoute
   '/login': typeof LoginRoute
   '/officer': typeof OfficerRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/vendor': typeof VendorRoute
+  '/vendor': typeof VendorRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
+  '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/rfqs': typeof VendorRfqsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/approver'
+    | '/auditor'
     | '/forgot-password'
+    | '/head'
     | '/login'
     | '/officer'
     | '/reset-password'
@@ -111,10 +159,15 @@ export interface FileRouteTypes {
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
+    | '/vendor/dashboard'
+    | '/vendor/rfqs'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/approver'
+    | '/auditor'
     | '/forgot-password'
+    | '/head'
     | '/login'
     | '/officer'
     | '/reset-password'
@@ -122,10 +175,15 @@ export interface FileRouteTypes {
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
+    | '/vendor/dashboard'
+    | '/vendor/rfqs'
   id:
     | '__root__'
     | '/'
+    | '/approver'
+    | '/auditor'
     | '/forgot-password'
+    | '/head'
     | '/login'
     | '/officer'
     | '/reset-password'
@@ -133,15 +191,20 @@ export interface FileRouteTypes {
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
+    | '/vendor/dashboard'
+    | '/vendor/rfqs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApproverRoute: typeof ApproverRoute
+  AuditorRoute: typeof AuditorRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  HeadRoute: typeof HeadRoute
   LoginRoute: typeof LoginRoute
   OfficerRoute: typeof OfficerRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
-  VendorRoute: typeof VendorRoute
+  VendorRoute: typeof VendorRouteWithChildren
   SignupMemberRoute: typeof SignupMemberRoute
   SignupOrganizationRoute: typeof SignupOrganizationRoute
   SignupVendorRoute: typeof SignupVendorRoute
@@ -177,11 +240,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/head': {
+      id: '/head'
+      path: '/head'
+      fullPath: '/head'
+      preLoaderRoute: typeof HeadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auditor': {
+      id: '/auditor'
+      path: '/auditor'
+      fullPath: '/auditor'
+      preLoaderRoute: typeof AuditorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approver': {
+      id: '/approver'
+      path: '/approver'
+      fullPath: '/approver'
+      preLoaderRoute: typeof ApproverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -190,6 +274,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/vendor/rfqs': {
+      id: '/vendor/rfqs'
+      path: '/rfqs'
+      fullPath: '/vendor/rfqs'
+      preLoaderRoute: typeof VendorRfqsRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/dashboard': {
+      id: '/vendor/dashboard'
+      path: '/dashboard'
+      fullPath: '/vendor/dashboard'
+      preLoaderRoute: typeof VendorDashboardRouteImport
+      parentRoute: typeof VendorRoute
     }
     '/signup/vendor': {
       id: '/signup/vendor'
@@ -215,13 +313,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface VendorRouteChildren {
+  VendorDashboardRoute: typeof VendorDashboardRoute
+  VendorRfqsRoute: typeof VendorRfqsRoute
+}
+
+const VendorRouteChildren: VendorRouteChildren = {
+  VendorDashboardRoute: VendorDashboardRoute,
+  VendorRfqsRoute: VendorRfqsRoute,
+}
+
+const VendorRouteWithChildren =
+  VendorRoute._addFileChildren(VendorRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApproverRoute: ApproverRoute,
+  AuditorRoute: AuditorRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  HeadRoute: HeadRoute,
   LoginRoute: LoginRoute,
   OfficerRoute: OfficerRoute,
   ResetPasswordRoute: ResetPasswordRoute,
-  VendorRoute: VendorRoute,
+  VendorRoute: VendorRouteWithChildren,
   SignupMemberRoute: SignupMemberRoute,
   SignupOrganizationRoute: SignupOrganizationRoute,
   SignupVendorRoute: SignupVendorRoute,
