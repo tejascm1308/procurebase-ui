@@ -20,11 +20,15 @@ import { Route as ApproverRouteImport } from './routes/approver'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorRfqsRouteImport } from './routes/vendor.rfqs'
 import { Route as VendorQuotationsRouteImport } from './routes/vendor.quotations'
+import { Route as VendorProfileRouteImport } from './routes/vendor.profile'
+import { Route as VendorOrdersRouteImport } from './routes/vendor.orders'
 import { Route as VendorDashboardRouteImport } from './routes/vendor.dashboard'
 import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
 import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
 import { Route as SignupMemberRouteImport } from './routes/signup.member'
 import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
+import { Route as VendorQuotationsIdRouteImport } from './routes/vendor.quotations.$id'
+import { Route as VendorOrdersIdRouteImport } from './routes/vendor.orders.$id'
 
 const VendorRoute = VendorRouteImport.update({
   id: '/vendor',
@@ -81,6 +85,16 @@ const VendorQuotationsRoute = VendorQuotationsRouteImport.update({
   path: '/quotations',
   getParentRoute: () => VendorRoute,
 } as any)
+const VendorProfileRoute = VendorProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => VendorRoute,
+} as any)
+const VendorOrdersRoute = VendorOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => VendorRoute,
+} as any)
 const VendorDashboardRoute = VendorDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -106,6 +120,16 @@ const VendorRfqsIdRoute = VendorRfqsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => VendorRfqsRoute,
 } as any)
+const VendorQuotationsIdRoute = VendorQuotationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VendorQuotationsRoute,
+} as any)
+const VendorOrdersIdRoute = VendorOrdersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VendorOrdersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -121,8 +145,12 @@ export interface FileRoutesByFullPath {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
-  '/vendor/quotations': typeof VendorQuotationsRoute
+  '/vendor/orders': typeof VendorOrdersRouteWithChildren
+  '/vendor/profile': typeof VendorProfileRoute
+  '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRoutesByTo {
@@ -139,8 +167,12 @@ export interface FileRoutesByTo {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
-  '/vendor/quotations': typeof VendorQuotationsRoute
+  '/vendor/orders': typeof VendorOrdersRouteWithChildren
+  '/vendor/profile': typeof VendorProfileRoute
+  '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRoutesById {
@@ -158,8 +190,12 @@ export interface FileRoutesById {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
-  '/vendor/quotations': typeof VendorQuotationsRoute
+  '/vendor/orders': typeof VendorOrdersRouteWithChildren
+  '/vendor/profile': typeof VendorProfileRoute
+  '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
 export interface FileRouteTypes {
@@ -178,8 +214,12 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/orders'
+    | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/vendor/orders/$id'
+    | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -196,8 +236,12 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/orders'
+    | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/vendor/orders/$id'
+    | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
   id:
     | '__root__'
@@ -214,8 +258,12 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/orders'
+    | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/vendor/orders/$id'
+    | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
   fileRoutesById: FileRoutesById
 }
@@ -313,6 +361,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorQuotationsRouteImport
       parentRoute: typeof VendorRoute
     }
+    '/vendor/profile': {
+      id: '/vendor/profile'
+      path: '/profile'
+      fullPath: '/vendor/profile'
+      preLoaderRoute: typeof VendorProfileRouteImport
+      parentRoute: typeof VendorRoute
+    }
+    '/vendor/orders': {
+      id: '/vendor/orders'
+      path: '/orders'
+      fullPath: '/vendor/orders'
+      preLoaderRoute: typeof VendorOrdersRouteImport
+      parentRoute: typeof VendorRoute
+    }
     '/vendor/dashboard': {
       id: '/vendor/dashboard'
       path: '/dashboard'
@@ -348,8 +410,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorRfqsIdRouteImport
       parentRoute: typeof VendorRfqsRoute
     }
+    '/vendor/quotations/$id': {
+      id: '/vendor/quotations/$id'
+      path: '/$id'
+      fullPath: '/vendor/quotations/$id'
+      preLoaderRoute: typeof VendorQuotationsIdRouteImport
+      parentRoute: typeof VendorQuotationsRoute
+    }
+    '/vendor/orders/$id': {
+      id: '/vendor/orders/$id'
+      path: '/$id'
+      fullPath: '/vendor/orders/$id'
+      preLoaderRoute: typeof VendorOrdersIdRouteImport
+      parentRoute: typeof VendorOrdersRoute
+    }
   }
 }
+
+interface VendorOrdersRouteChildren {
+  VendorOrdersIdRoute: typeof VendorOrdersIdRoute
+}
+
+const VendorOrdersRouteChildren: VendorOrdersRouteChildren = {
+  VendorOrdersIdRoute: VendorOrdersIdRoute,
+}
+
+const VendorOrdersRouteWithChildren = VendorOrdersRoute._addFileChildren(
+  VendorOrdersRouteChildren,
+)
+
+interface VendorQuotationsRouteChildren {
+  VendorQuotationsIdRoute: typeof VendorQuotationsIdRoute
+}
+
+const VendorQuotationsRouteChildren: VendorQuotationsRouteChildren = {
+  VendorQuotationsIdRoute: VendorQuotationsIdRoute,
+}
+
+const VendorQuotationsRouteWithChildren =
+  VendorQuotationsRoute._addFileChildren(VendorQuotationsRouteChildren)
 
 interface VendorRfqsRouteChildren {
   VendorRfqsIdRoute: typeof VendorRfqsIdRoute
@@ -365,13 +464,17 @@ const VendorRfqsRouteWithChildren = VendorRfqsRoute._addFileChildren(
 
 interface VendorRouteChildren {
   VendorDashboardRoute: typeof VendorDashboardRoute
-  VendorQuotationsRoute: typeof VendorQuotationsRoute
+  VendorOrdersRoute: typeof VendorOrdersRouteWithChildren
+  VendorProfileRoute: typeof VendorProfileRoute
+  VendorQuotationsRoute: typeof VendorQuotationsRouteWithChildren
   VendorRfqsRoute: typeof VendorRfqsRouteWithChildren
 }
 
 const VendorRouteChildren: VendorRouteChildren = {
   VendorDashboardRoute: VendorDashboardRoute,
-  VendorQuotationsRoute: VendorQuotationsRoute,
+  VendorOrdersRoute: VendorOrdersRouteWithChildren,
+  VendorProfileRoute: VendorProfileRoute,
+  VendorQuotationsRoute: VendorQuotationsRouteWithChildren,
   VendorRfqsRoute: VendorRfqsRouteWithChildren,
 }
 
