@@ -31,6 +31,10 @@ import { Route as OfficerVendorsRouteImport } from './routes/officer.vendors'
 import { Route as OfficerRfqsRouteImport } from './routes/officer.rfqs'
 import { Route as OfficerNotificationsRouteImport } from './routes/officer.notifications'
 import { Route as OfficerDashboardRouteImport } from './routes/officer.dashboard'
+import { Route as ApproverPendingRouteImport } from './routes/approver.pending'
+import { Route as ApproverNotificationsRouteImport } from './routes/approver.notifications'
+import { Route as ApproverHistoryRouteImport } from './routes/approver.history'
+import { Route as ApproverEscalationsRouteImport } from './routes/approver.escalations'
 import { Route as ApproverDashboardRouteImport } from './routes/approver.dashboard'
 import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
 import { Route as VendorQuotationsIdRouteImport } from './routes/vendor.quotations.$id'
@@ -39,6 +43,7 @@ import { Route as VendorOrdersIdRouteImport } from './routes/vendor.orders.$id'
 import { Route as OfficerVendorsIdRouteImport } from './routes/officer.vendors.$id'
 import { Route as OfficerRfqsCreateRouteImport } from './routes/officer.rfqs.create'
 import { Route as OfficerRfqsIdRouteImport } from './routes/officer.rfqs.$id'
+import { Route as ApproverCompareRfqIdRouteImport } from './routes/approver.compare.$rfqId'
 
 const VendorRoute = VendorRouteImport.update({
   id: '/vendor',
@@ -150,6 +155,26 @@ const OfficerDashboardRoute = OfficerDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => OfficerRoute,
 } as any)
+const ApproverPendingRoute = ApproverPendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverNotificationsRoute = ApproverNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverHistoryRoute = ApproverHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => ApproverRoute,
+} as any)
+const ApproverEscalationsRoute = ApproverEscalationsRouteImport.update({
+  id: '/escalations',
+  path: '/escalations',
+  getParentRoute: () => ApproverRoute,
+} as any)
 const ApproverDashboardRoute = ApproverDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -190,6 +215,11 @@ const OfficerRfqsIdRoute = OfficerRfqsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => OfficerRfqsRoute,
 } as any)
+const ApproverCompareRfqIdRoute = ApproverCompareRfqIdRouteImport.update({
+  id: '/compare/$rfqId',
+  path: '/compare/$rfqId',
+  getParentRoute: () => ApproverRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -202,6 +232,10 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/vendor': typeof VendorRouteWithChildren
   '/approver/dashboard': typeof ApproverDashboardRoute
+  '/approver/escalations': typeof ApproverEscalationsRoute
+  '/approver/history': typeof ApproverHistoryRoute
+  '/approver/notifications': typeof ApproverNotificationsRoute
+  '/approver/pending': typeof ApproverPendingRoute
   '/officer/dashboard': typeof OfficerDashboardRoute
   '/officer/notifications': typeof OfficerNotificationsRoute
   '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
@@ -215,6 +249,7 @@ export interface FileRoutesByFullPath {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
   '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
   '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
   '/officer/vendors/$id': typeof OfficerVendorsIdRoute
@@ -234,6 +269,10 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/vendor': typeof VendorRouteWithChildren
   '/approver/dashboard': typeof ApproverDashboardRoute
+  '/approver/escalations': typeof ApproverEscalationsRoute
+  '/approver/history': typeof ApproverHistoryRoute
+  '/approver/notifications': typeof ApproverNotificationsRoute
+  '/approver/pending': typeof ApproverPendingRoute
   '/officer/dashboard': typeof OfficerDashboardRoute
   '/officer/notifications': typeof OfficerNotificationsRoute
   '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
@@ -247,6 +286,7 @@ export interface FileRoutesByTo {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
   '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
   '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
   '/officer/vendors/$id': typeof OfficerVendorsIdRoute
@@ -267,6 +307,10 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/vendor': typeof VendorRouteWithChildren
   '/approver/dashboard': typeof ApproverDashboardRoute
+  '/approver/escalations': typeof ApproverEscalationsRoute
+  '/approver/history': typeof ApproverHistoryRoute
+  '/approver/notifications': typeof ApproverNotificationsRoute
+  '/approver/pending': typeof ApproverPendingRoute
   '/officer/dashboard': typeof OfficerDashboardRoute
   '/officer/notifications': typeof OfficerNotificationsRoute
   '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
@@ -280,6 +324,7 @@ export interface FileRoutesById {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
   '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
   '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
   '/officer/vendors/$id': typeof OfficerVendorsIdRoute
@@ -301,6 +346,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/vendor'
     | '/approver/dashboard'
+    | '/approver/escalations'
+    | '/approver/history'
+    | '/approver/notifications'
+    | '/approver/pending'
     | '/officer/dashboard'
     | '/officer/notifications'
     | '/officer/rfqs'
@@ -314,6 +363,7 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/approver/compare/$rfqId'
     | '/officer/rfqs/$id'
     | '/officer/rfqs/create'
     | '/officer/vendors/$id'
@@ -333,6 +383,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/vendor'
     | '/approver/dashboard'
+    | '/approver/escalations'
+    | '/approver/history'
+    | '/approver/notifications'
+    | '/approver/pending'
     | '/officer/dashboard'
     | '/officer/notifications'
     | '/officer/rfqs'
@@ -346,6 +400,7 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/approver/compare/$rfqId'
     | '/officer/rfqs/$id'
     | '/officer/rfqs/create'
     | '/officer/vendors/$id'
@@ -365,6 +420,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/vendor'
     | '/approver/dashboard'
+    | '/approver/escalations'
+    | '/approver/history'
+    | '/approver/notifications'
+    | '/approver/pending'
     | '/officer/dashboard'
     | '/officer/notifications'
     | '/officer/rfqs'
@@ -378,6 +437,7 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/approver/compare/$rfqId'
     | '/officer/rfqs/$id'
     | '/officer/rfqs/create'
     | '/officer/vendors/$id'
@@ -558,6 +618,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfficerDashboardRouteImport
       parentRoute: typeof OfficerRoute
     }
+    '/approver/pending': {
+      id: '/approver/pending'
+      path: '/pending'
+      fullPath: '/approver/pending'
+      preLoaderRoute: typeof ApproverPendingRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/notifications': {
+      id: '/approver/notifications'
+      path: '/notifications'
+      fullPath: '/approver/notifications'
+      preLoaderRoute: typeof ApproverNotificationsRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/history': {
+      id: '/approver/history'
+      path: '/history'
+      fullPath: '/approver/history'
+      preLoaderRoute: typeof ApproverHistoryRouteImport
+      parentRoute: typeof ApproverRoute
+    }
+    '/approver/escalations': {
+      id: '/approver/escalations'
+      path: '/escalations'
+      fullPath: '/approver/escalations'
+      preLoaderRoute: typeof ApproverEscalationsRouteImport
+      parentRoute: typeof ApproverRoute
+    }
     '/approver/dashboard': {
       id: '/approver/dashboard'
       path: '/dashboard'
@@ -614,15 +702,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfficerRfqsIdRouteImport
       parentRoute: typeof OfficerRfqsRoute
     }
+    '/approver/compare/$rfqId': {
+      id: '/approver/compare/$rfqId'
+      path: '/compare/$rfqId'
+      fullPath: '/approver/compare/$rfqId'
+      preLoaderRoute: typeof ApproverCompareRfqIdRouteImport
+      parentRoute: typeof ApproverRoute
+    }
   }
 }
 
 interface ApproverRouteChildren {
   ApproverDashboardRoute: typeof ApproverDashboardRoute
+  ApproverEscalationsRoute: typeof ApproverEscalationsRoute
+  ApproverHistoryRoute: typeof ApproverHistoryRoute
+  ApproverNotificationsRoute: typeof ApproverNotificationsRoute
+  ApproverPendingRoute: typeof ApproverPendingRoute
+  ApproverCompareRfqIdRoute: typeof ApproverCompareRfqIdRoute
 }
 
 const ApproverRouteChildren: ApproverRouteChildren = {
   ApproverDashboardRoute: ApproverDashboardRoute,
+  ApproverEscalationsRoute: ApproverEscalationsRoute,
+  ApproverHistoryRoute: ApproverHistoryRoute,
+  ApproverNotificationsRoute: ApproverNotificationsRoute,
+  ApproverPendingRoute: ApproverPendingRoute,
+  ApproverCompareRfqIdRoute: ApproverCompareRfqIdRoute,
 }
 
 const ApproverRouteWithChildren = ApproverRoute._addFileChildren(
