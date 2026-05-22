@@ -22,12 +22,14 @@ import { Route as VendorRfqsRouteImport } from './routes/vendor.rfqs'
 import { Route as VendorQuotationsRouteImport } from './routes/vendor.quotations'
 import { Route as VendorProfileRouteImport } from './routes/vendor.profile'
 import { Route as VendorOrdersRouteImport } from './routes/vendor.orders'
+import { Route as VendorNotificationsRouteImport } from './routes/vendor.notifications'
 import { Route as VendorDashboardRouteImport } from './routes/vendor.dashboard'
 import { Route as SignupVendorRouteImport } from './routes/signup.vendor'
 import { Route as SignupOrganizationRouteImport } from './routes/signup.organization'
 import { Route as SignupMemberRouteImport } from './routes/signup.member'
 import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
 import { Route as VendorQuotationsIdRouteImport } from './routes/vendor.quotations.$id'
+import { Route as VendorProfileCompleteRouteImport } from './routes/vendor.profile.complete'
 import { Route as VendorOrdersIdRouteImport } from './routes/vendor.orders.$id'
 
 const VendorRoute = VendorRouteImport.update({
@@ -95,6 +97,11 @@ const VendorOrdersRoute = VendorOrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => VendorRoute,
 } as any)
+const VendorNotificationsRoute = VendorNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => VendorRoute,
+} as any)
 const VendorDashboardRoute = VendorDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -125,6 +132,11 @@ const VendorQuotationsIdRoute = VendorQuotationsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => VendorQuotationsRoute,
 } as any)
+const VendorProfileCompleteRoute = VendorProfileCompleteRouteImport.update({
+  id: '/complete',
+  path: '/complete',
+  getParentRoute: () => VendorProfileRoute,
+} as any)
 const VendorOrdersIdRoute = VendorOrdersIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -145,11 +157,13 @@ export interface FileRoutesByFullPath {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/notifications': typeof VendorNotificationsRoute
   '/vendor/orders': typeof VendorOrdersRouteWithChildren
-  '/vendor/profile': typeof VendorProfileRoute
+  '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
   '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
@@ -167,11 +181,13 @@ export interface FileRoutesByTo {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/notifications': typeof VendorNotificationsRoute
   '/vendor/orders': typeof VendorOrdersRouteWithChildren
-  '/vendor/profile': typeof VendorProfileRoute
+  '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
   '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
@@ -190,11 +206,13 @@ export interface FileRoutesById {
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
+  '/vendor/notifications': typeof VendorNotificationsRoute
   '/vendor/orders': typeof VendorOrdersRouteWithChildren
-  '/vendor/profile': typeof VendorProfileRoute
+  '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
   '/vendor/orders/$id': typeof VendorOrdersIdRoute
+  '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
 }
@@ -214,11 +232,13 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/notifications'
     | '/vendor/orders'
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
     | '/vendor/orders/$id'
+    | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -236,11 +256,13 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/notifications'
     | '/vendor/orders'
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
     | '/vendor/orders/$id'
+    | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
   id:
@@ -258,11 +280,13 @@ export interface FileRouteTypes {
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
+    | '/vendor/notifications'
     | '/vendor/orders'
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
     | '/vendor/orders/$id'
+    | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
   fileRoutesById: FileRoutesById
@@ -375,6 +399,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorOrdersRouteImport
       parentRoute: typeof VendorRoute
     }
+    '/vendor/notifications': {
+      id: '/vendor/notifications'
+      path: '/notifications'
+      fullPath: '/vendor/notifications'
+      preLoaderRoute: typeof VendorNotificationsRouteImport
+      parentRoute: typeof VendorRoute
+    }
     '/vendor/dashboard': {
       id: '/vendor/dashboard'
       path: '/dashboard'
@@ -417,6 +448,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorQuotationsIdRouteImport
       parentRoute: typeof VendorQuotationsRoute
     }
+    '/vendor/profile/complete': {
+      id: '/vendor/profile/complete'
+      path: '/complete'
+      fullPath: '/vendor/profile/complete'
+      preLoaderRoute: typeof VendorProfileCompleteRouteImport
+      parentRoute: typeof VendorProfileRoute
+    }
     '/vendor/orders/$id': {
       id: '/vendor/orders/$id'
       path: '/$id'
@@ -437,6 +475,18 @@ const VendorOrdersRouteChildren: VendorOrdersRouteChildren = {
 
 const VendorOrdersRouteWithChildren = VendorOrdersRoute._addFileChildren(
   VendorOrdersRouteChildren,
+)
+
+interface VendorProfileRouteChildren {
+  VendorProfileCompleteRoute: typeof VendorProfileCompleteRoute
+}
+
+const VendorProfileRouteChildren: VendorProfileRouteChildren = {
+  VendorProfileCompleteRoute: VendorProfileCompleteRoute,
+}
+
+const VendorProfileRouteWithChildren = VendorProfileRoute._addFileChildren(
+  VendorProfileRouteChildren,
 )
 
 interface VendorQuotationsRouteChildren {
@@ -464,16 +514,18 @@ const VendorRfqsRouteWithChildren = VendorRfqsRoute._addFileChildren(
 
 interface VendorRouteChildren {
   VendorDashboardRoute: typeof VendorDashboardRoute
+  VendorNotificationsRoute: typeof VendorNotificationsRoute
   VendorOrdersRoute: typeof VendorOrdersRouteWithChildren
-  VendorProfileRoute: typeof VendorProfileRoute
+  VendorProfileRoute: typeof VendorProfileRouteWithChildren
   VendorQuotationsRoute: typeof VendorQuotationsRouteWithChildren
   VendorRfqsRoute: typeof VendorRfqsRouteWithChildren
 }
 
 const VendorRouteChildren: VendorRouteChildren = {
   VendorDashboardRoute: VendorDashboardRoute,
+  VendorNotificationsRoute: VendorNotificationsRoute,
   VendorOrdersRoute: VendorOrdersRouteWithChildren,
-  VendorProfileRoute: VendorProfileRoute,
+  VendorProfileRoute: VendorProfileRouteWithChildren,
   VendorQuotationsRoute: VendorQuotationsRouteWithChildren,
   VendorRfqsRoute: VendorRfqsRouteWithChildren,
 }
