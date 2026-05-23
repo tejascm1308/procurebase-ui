@@ -1,45 +1,73 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Files, FileCheck, Clock, CheckCircle2, FilePlus2, Search, Sparkles } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { PageHeader } from "@/components/app/PageHeader";
 import { KPICard } from "@/components/app/KPICard";
 import { StatusBadge } from "@/components/app/StatusBadge";
-import { rfqs } from "@/lib/mock-data";
+import { CheckCircle2, Clock, FileText, ShoppingBag } from "lucide-react";
+import { useOrgOrders, useRFQs } from "@/lib/queries";
+import type { PurchaseOrder, RFQ } from "@/lib/types";
 
-export const Route = createFileRoute("/officer/dashboard")({ component: Dash });
+export const Route = createFileRoute("/officer/dashboard")({ component: OfficerDashboard });
 
-function Dash() {
+function OfficerDashboard() {
+  const navigate = useNavigate();
+  const { data: orders = [] } = useOrgOrders();
+  const { data: rfqs = [] }   = useRFQs();
+
+  const activeOrders    = (orders as PurchaseOrder[]).filter(o => o.status !== "delivered" && o.status !== "cancelled");
+  const completedOrders = (orders as PurchaseOrder[]).filter(o => o.status === "delivered");
+  const draftRFQs       = (rfqs as RFQ[]).filter(r => r.status === "draft");
+  const sentRFQs        = (rfqs as RFQ[]).filter(r => r.status === "sent" || r.status === "under_review");
+
   return (
     <div>
-      <PageHeader eyebrow="Procurement Officer" title="Procurement Overview" subtitle="Active requests, vendor responses, and pending decisions." />
+      <PageHeader eyebrow="Officer" title="Procurement Overview" subtitle="Track your RFQs and active purchase orders." />
+
+      {/* KPIs */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-        <KPICard icon={Files} label="Active RFQs" value="12" trend="+2 this week" tone="blue" />
-        <KPICard icon={FileCheck} label="Quotes Received" value="47" trend="+8 today" tone="violet" />
-        <KPICard icon={Clock} label="Pending Decisions" value="6" trend="3 high priority" tone="amber" />
-        <KPICard icon={CheckCircle2} label="Completed" value="158" trend="₹8.4Cr value" tone="green" />
+        <KPICard icon={FileText}     label="Active RFQs"    value={String(sentRFQs.length)}        trend="Awaiting quotes"  tone="violet" />
+        <KPICard icon={FileText}     label="Drafts"         value={String(draftRFQs.length)}       trend="Not sent yet"     tone="amber" />
+        <KPICard icon={Clock}        label="Active Orders"  value={String(activeOrders.length)}    trend="In progress"      tone="blue" />
+        <KPICard icon={CheckCircle2} label="Completed"      value={String(completedOrders.length)} trend="Delivered"        tone="green" />
       </div>
-      <div className="grid gap-6 lg:grid-cols-3 mb-6">
-        {[
-          { to: "/officer/rfqs/create", icon: FilePlus2, label: "Create Manual RFQ" },
-          { to: "/officer/rfqs/create", icon: Sparkles, label: "Generate with AI" },
-          { to: "/officer/vendors", icon: Search, label: "Search Vendors" },
-        ].map((a) => (
-          <Link key={a.label} to={a.to} className="rounded-2xl border bg-card p-5 shadow-card transition hover:shadow-card-hover">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent"><a.icon className="h-5 w-5 text-primary" /></div>
-            <p className="mt-4 text-sm font-semibold text-heading">{a.label}</p>
-          </Link>
-        ))}
-      </div>
+
+      {/* Recent Purchase Orders */}
       <div className="rounded-2xl border bg-card shadow-card">
-        <div className="flex items-center justify-between border-b p-5"><h3 className="text-sm font-semibold text-heading">My Recent RFQs</h3><Link to="/officer/rfqs" className="text-xs font-semibold text-primary hover:underline">View all →</Link></div>
-        <table className="w-full text-sm">
-          <thead><tr className="text-left label-tiny"><th className="px-5 py-2.5">RFQ</th><th className="px-5 py-2.5">Type</th><th className="px-5 py-2.5">Quotes</th><th className="px-5 py-2.5">Deadline</th><th className="px-5 py-2.5">Status</th></tr></thead>
-          <tbody>{rfqs.slice(0,5).map((r,i) => (
-            <tr key={r.id} className={`border-t hover:bg-[#F0F4F8] ${i%2===0 ? "bg-page/40" : ""}`}>
-              <td className="px-5 py-3"><Link to="/officer/rfqs/$id" params={{id: r.id}} className="font-semibold text-heading hover:text-primary">{r.title}</Link><p className="text-xs text-mute">{r.id}</p></td>
-              <td className="px-5 py-3 text-body">{r.type}</td><td className="px-5 py-3 font-semibold text-heading">{r.quotesReceived}</td><td className="px-5 py-3 text-body">{r.deadline}</td><td className="px-5 py-3"><StatusBadge status={r.status} /></td>
-            </tr>
-          ))}</tbody>
-        </table>
+        <div className="flex items-center justify-between border-b p-5">
+          <h3 className="text-sm font-semibold text-heading">Recent Purchase Orders</h3>
+          <Link to="/officer/rfqs" className="text-xs font-semibold text-primary hover:underline">View all RFQs →</Link>
+        </div>
+        {(orders as PurchaseOrder[]).length === 0 ? (
+          <div className="flex flex-col items-center py-12 text-center">
+            <ShoppingBag className="h-8 w-8 text-mute mb-3" />
+            <p className="text-sm font-semibold text-heading">No orders yet</p>
+            <p className="text-xs text-mute mt-1 mb-4">Once a quote is approved, a purchase order will appear here.</p>
+            <button onClick={() => navigate({ to: "/officer/rfqs/create" })}
+              className="inline-flex h-9 items-center rounded-lg bg-gradient-primary px-4 text-xs font-semibold text-white shadow-card hover:opacity-90">
+              Create your first RFQ →
+            </button>
+          </div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead><tr className="border-b label-tiny text-left bg-[#F8FAFC]">
+              <th className="px-5 py-3">PO Number</th>
+              <th className="px-5 py-3">Vendor</th>
+              <th className="px-5 py-3">Amount</th>
+              <th className="px-5 py-3">Deadline</th>
+              <th className="px-5 py-3">Status</th>
+            </tr></thead>
+            <tbody>
+              {(orders as PurchaseOrder[]).slice(0, 8).map(o => (
+                <tr key={o.id} className="border-t hover:bg-[#F0F4F8]">
+                  <td className="px-5 py-3 font-mono text-xs text-heading">{o.po_number}</td>
+                  <td className="px-5 py-3 font-semibold text-heading">{(o as any).vendors?.legal_name ?? "—"}</td>
+                  <td className="px-5 py-3 text-body">₹{o.total_amount?.toLocaleString("en-IN")}</td>
+                  <td className="px-5 py-3 text-body">{o.delivery_deadline}</td>
+                  <td className="px-5 py-3"><StatusBadge status={o.status.toUpperCase()} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

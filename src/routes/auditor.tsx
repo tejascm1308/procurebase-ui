@@ -1,15 +1,16 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { LayoutDashboard, ScrollText, AlertTriangle, FileSearch, FolderLock } from "lucide-react";
+import { Activity, FileText, GitBranch, Shield, Bell } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { ProtectedRoute } from "@/components/app/ProtectedRoute";
 
 export const Route = createFileRoute("/auditor")({ component: AuditorLayout });
 
 const NAV: NavItem[] = [
-  { to: "/auditor/dashboard", label: "Overview", icon: LayoutDashboard },
-  { to: "/auditor/logs", label: "Activity Logs", icon: ScrollText },
-  { to: "/auditor/anomalies", label: "Anomaly Alerts", icon: AlertTriangle },
-  { to: "/auditor/documents", label: "Document Access", icon: FolderLock },
+  { to: "/auditor/overview",       label: "Overview",      icon: Activity  },
+  { to: "/auditor/audit-logs",     label: "Audit Logs",    icon: FileText  },
+  { to: "/auditor/rfq-timeline",   label: "RFQ Timeline",  icon: GitBranch },
+  { to: "/auditor/anomalies",      label: "Anomalies",     icon: Shield    },
+  { to: "/auditor/notifications",  label: "Notifications", icon: Bell      },
 ];
 
 function AuditorLayout() {

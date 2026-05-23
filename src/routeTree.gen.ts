@@ -18,6 +18,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AuditorRouteImport } from './routes/auditor'
 import { Route as ApproverRouteImport } from './routes/approver'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditorIndexRouteImport } from './routes/auditor.index'
 import { Route as VendorRfqsRouteImport } from './routes/vendor.rfqs'
 import { Route as VendorQuotationsRouteImport } from './routes/vendor.quotations'
 import { Route as VendorProfileRouteImport } from './routes/vendor.profile'
@@ -31,11 +32,27 @@ import { Route as OfficerVendorsRouteImport } from './routes/officer.vendors'
 import { Route as OfficerRfqsRouteImport } from './routes/officer.rfqs'
 import { Route as OfficerNotificationsRouteImport } from './routes/officer.notifications'
 import { Route as OfficerDashboardRouteImport } from './routes/officer.dashboard'
+import { Route as HeadVerifyGstinRouteImport } from './routes/head.verify-gstin'
+import { Route as HeadVendorsRouteImport } from './routes/head.vendors'
+import { Route as HeadTeamRouteImport } from './routes/head.team'
+import { Route as HeadSettingsRouteImport } from './routes/head.settings'
+import { Route as HeadRfqsRouteImport } from './routes/head.rfqs'
+import { Route as HeadEscalationsRouteImport } from './routes/head.escalations'
+import { Route as HeadDashboardRouteImport } from './routes/head.dashboard'
+import { Route as AuditorRfqTimelineRouteImport } from './routes/auditor.rfq-timeline'
+import { Route as AuditorOverviewRouteImport } from './routes/auditor.overview'
+import { Route as AuditorNotificationsRouteImport } from './routes/auditor.notifications'
+import { Route as AuditorAuditLogsRouteImport } from './routes/auditor.audit-logs'
+import { Route as AuditorAnomaliesRouteImport } from './routes/auditor.anomalies'
 import { Route as ApproverPendingRouteImport } from './routes/approver.pending'
 import { Route as ApproverNotificationsRouteImport } from './routes/approver.notifications'
 import { Route as ApproverHistoryRouteImport } from './routes/approver.history'
 import { Route as ApproverEscalationsRouteImport } from './routes/approver.escalations'
 import { Route as ApproverDashboardRouteImport } from './routes/approver.dashboard'
+import { Route as VendorRfqsIndexRouteImport } from './routes/vendor.rfqs.index'
+import { Route as VendorOrdersIndexRouteImport } from './routes/vendor.orders.index'
+import { Route as OfficerVendorsIndexRouteImport } from './routes/officer.vendors.index'
+import { Route as OfficerRfqsIndexRouteImport } from './routes/officer.rfqs.index'
 import { Route as VendorRfqsIdRouteImport } from './routes/vendor.rfqs.$id'
 import { Route as VendorQuotationsIdRouteImport } from './routes/vendor.quotations.$id'
 import { Route as VendorProfileCompleteRouteImport } from './routes/vendor.profile.complete'
@@ -43,6 +60,7 @@ import { Route as VendorOrdersIdRouteImport } from './routes/vendor.orders.$id'
 import { Route as OfficerVendorsIdRouteImport } from './routes/officer.vendors.$id'
 import { Route as OfficerRfqsCreateRouteImport } from './routes/officer.rfqs.create'
 import { Route as OfficerRfqsIdRouteImport } from './routes/officer.rfqs.$id'
+import { Route as HeadEscalationReviewRfqIdRouteImport } from './routes/head.escalation-review.$rfqId'
 import { Route as ApproverCompareRfqIdRouteImport } from './routes/approver.compare.$rfqId'
 
 const VendorRoute = VendorRouteImport.update({
@@ -89,6 +107,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuditorIndexRoute = AuditorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuditorRoute,
 } as any)
 const VendorRfqsRoute = VendorRfqsRouteImport.update({
   id: '/rfqs',
@@ -155,6 +178,66 @@ const OfficerDashboardRoute = OfficerDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => OfficerRoute,
 } as any)
+const HeadVerifyGstinRoute = HeadVerifyGstinRouteImport.update({
+  id: '/verify-gstin',
+  path: '/verify-gstin',
+  getParentRoute: () => HeadRoute,
+} as any)
+const HeadVendorsRoute = HeadVendorsRouteImport.update({
+  id: '/vendors',
+  path: '/vendors',
+  getParentRoute: () => HeadRoute,
+} as any)
+const HeadTeamRoute = HeadTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => HeadRoute,
+} as any)
+const HeadSettingsRoute = HeadSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => HeadRoute,
+} as any)
+const HeadRfqsRoute = HeadRfqsRouteImport.update({
+  id: '/rfqs',
+  path: '/rfqs',
+  getParentRoute: () => HeadRoute,
+} as any)
+const HeadEscalationsRoute = HeadEscalationsRouteImport.update({
+  id: '/escalations',
+  path: '/escalations',
+  getParentRoute: () => HeadRoute,
+} as any)
+const HeadDashboardRoute = HeadDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => HeadRoute,
+} as any)
+const AuditorRfqTimelineRoute = AuditorRfqTimelineRouteImport.update({
+  id: '/rfq-timeline',
+  path: '/rfq-timeline',
+  getParentRoute: () => AuditorRoute,
+} as any)
+const AuditorOverviewRoute = AuditorOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => AuditorRoute,
+} as any)
+const AuditorNotificationsRoute = AuditorNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AuditorRoute,
+} as any)
+const AuditorAuditLogsRoute = AuditorAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => AuditorRoute,
+} as any)
+const AuditorAnomaliesRoute = AuditorAnomaliesRouteImport.update({
+  id: '/anomalies',
+  path: '/anomalies',
+  getParentRoute: () => AuditorRoute,
+} as any)
 const ApproverPendingRoute = ApproverPendingRouteImport.update({
   id: '/pending',
   path: '/pending',
@@ -179,6 +262,26 @@ const ApproverDashboardRoute = ApproverDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => ApproverRoute,
+} as any)
+const VendorRfqsIndexRoute = VendorRfqsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => VendorRfqsRoute,
+} as any)
+const VendorOrdersIndexRoute = VendorOrdersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => VendorOrdersRoute,
+} as any)
+const OfficerVendorsIndexRoute = OfficerVendorsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OfficerVendorsRoute,
+} as any)
+const OfficerRfqsIndexRoute = OfficerRfqsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OfficerRfqsRoute,
 } as any)
 const VendorRfqsIdRoute = VendorRfqsIdRouteImport.update({
   id: '/$id',
@@ -215,6 +318,12 @@ const OfficerRfqsIdRoute = OfficerRfqsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => OfficerRfqsRoute,
 } as any)
+const HeadEscalationReviewRfqIdRoute =
+  HeadEscalationReviewRfqIdRouteImport.update({
+    id: '/escalation-review/$rfqId',
+    path: '/escalation-review/$rfqId',
+    getParentRoute: () => HeadRoute,
+  } as any)
 const ApproverCompareRfqIdRoute = ApproverCompareRfqIdRouteImport.update({
   id: '/compare/$rfqId',
   path: '/compare/$rfqId',
@@ -224,9 +333,9 @@ const ApproverCompareRfqIdRoute = ApproverCompareRfqIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/approver': typeof ApproverRouteWithChildren
-  '/auditor': typeof AuditorRoute
+  '/auditor': typeof AuditorRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
-  '/head': typeof HeadRoute
+  '/head': typeof HeadRouteWithChildren
   '/login': typeof LoginRoute
   '/officer': typeof OfficerRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
@@ -236,6 +345,18 @@ export interface FileRoutesByFullPath {
   '/approver/history': typeof ApproverHistoryRoute
   '/approver/notifications': typeof ApproverNotificationsRoute
   '/approver/pending': typeof ApproverPendingRoute
+  '/auditor/anomalies': typeof AuditorAnomaliesRoute
+  '/auditor/audit-logs': typeof AuditorAuditLogsRoute
+  '/auditor/notifications': typeof AuditorNotificationsRoute
+  '/auditor/overview': typeof AuditorOverviewRoute
+  '/auditor/rfq-timeline': typeof AuditorRfqTimelineRoute
+  '/head/dashboard': typeof HeadDashboardRoute
+  '/head/escalations': typeof HeadEscalationsRoute
+  '/head/rfqs': typeof HeadRfqsRoute
+  '/head/settings': typeof HeadSettingsRoute
+  '/head/team': typeof HeadTeamRoute
+  '/head/vendors': typeof HeadVendorsRoute
+  '/head/verify-gstin': typeof HeadVerifyGstinRoute
   '/officer/dashboard': typeof OfficerDashboardRoute
   '/officer/notifications': typeof OfficerNotificationsRoute
   '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
@@ -249,7 +370,9 @@ export interface FileRoutesByFullPath {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/auditor/': typeof AuditorIndexRoute
   '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
+  '/head/escalation-review/$rfqId': typeof HeadEscalationReviewRfqIdRoute
   '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
   '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
   '/officer/vendors/$id': typeof OfficerVendorsIdRoute
@@ -257,13 +380,16 @@ export interface FileRoutesByFullPath {
   '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
+  '/officer/rfqs/': typeof OfficerRfqsIndexRoute
+  '/officer/vendors/': typeof OfficerVendorsIndexRoute
+  '/vendor/orders/': typeof VendorOrdersIndexRoute
+  '/vendor/rfqs/': typeof VendorRfqsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/approver': typeof ApproverRouteWithChildren
-  '/auditor': typeof AuditorRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/head': typeof HeadRoute
+  '/head': typeof HeadRouteWithChildren
   '/login': typeof LoginRoute
   '/officer': typeof OfficerRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
@@ -273,20 +399,30 @@ export interface FileRoutesByTo {
   '/approver/history': typeof ApproverHistoryRoute
   '/approver/notifications': typeof ApproverNotificationsRoute
   '/approver/pending': typeof ApproverPendingRoute
+  '/auditor/anomalies': typeof AuditorAnomaliesRoute
+  '/auditor/audit-logs': typeof AuditorAuditLogsRoute
+  '/auditor/notifications': typeof AuditorNotificationsRoute
+  '/auditor/overview': typeof AuditorOverviewRoute
+  '/auditor/rfq-timeline': typeof AuditorRfqTimelineRoute
+  '/head/dashboard': typeof HeadDashboardRoute
+  '/head/escalations': typeof HeadEscalationsRoute
+  '/head/rfqs': typeof HeadRfqsRoute
+  '/head/settings': typeof HeadSettingsRoute
+  '/head/team': typeof HeadTeamRoute
+  '/head/vendors': typeof HeadVendorsRoute
+  '/head/verify-gstin': typeof HeadVerifyGstinRoute
   '/officer/dashboard': typeof OfficerDashboardRoute
   '/officer/notifications': typeof OfficerNotificationsRoute
-  '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
-  '/officer/vendors': typeof OfficerVendorsRouteWithChildren
   '/signup/member': typeof SignupMemberRoute
   '/signup/organization': typeof SignupOrganizationRoute
   '/signup/vendor': typeof SignupVendorRoute
   '/vendor/dashboard': typeof VendorDashboardRoute
   '/vendor/notifications': typeof VendorNotificationsRoute
-  '/vendor/orders': typeof VendorOrdersRouteWithChildren
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
-  '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/auditor': typeof AuditorIndexRoute
   '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
+  '/head/escalation-review/$rfqId': typeof HeadEscalationReviewRfqIdRoute
   '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
   '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
   '/officer/vendors/$id': typeof OfficerVendorsIdRoute
@@ -294,14 +430,18 @@ export interface FileRoutesByTo {
   '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
+  '/officer/rfqs': typeof OfficerRfqsIndexRoute
+  '/officer/vendors': typeof OfficerVendorsIndexRoute
+  '/vendor/orders': typeof VendorOrdersIndexRoute
+  '/vendor/rfqs': typeof VendorRfqsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/approver': typeof ApproverRouteWithChildren
-  '/auditor': typeof AuditorRoute
+  '/auditor': typeof AuditorRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
-  '/head': typeof HeadRoute
+  '/head': typeof HeadRouteWithChildren
   '/login': typeof LoginRoute
   '/officer': typeof OfficerRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
@@ -311,6 +451,18 @@ export interface FileRoutesById {
   '/approver/history': typeof ApproverHistoryRoute
   '/approver/notifications': typeof ApproverNotificationsRoute
   '/approver/pending': typeof ApproverPendingRoute
+  '/auditor/anomalies': typeof AuditorAnomaliesRoute
+  '/auditor/audit-logs': typeof AuditorAuditLogsRoute
+  '/auditor/notifications': typeof AuditorNotificationsRoute
+  '/auditor/overview': typeof AuditorOverviewRoute
+  '/auditor/rfq-timeline': typeof AuditorRfqTimelineRoute
+  '/head/dashboard': typeof HeadDashboardRoute
+  '/head/escalations': typeof HeadEscalationsRoute
+  '/head/rfqs': typeof HeadRfqsRoute
+  '/head/settings': typeof HeadSettingsRoute
+  '/head/team': typeof HeadTeamRoute
+  '/head/vendors': typeof HeadVendorsRoute
+  '/head/verify-gstin': typeof HeadVerifyGstinRoute
   '/officer/dashboard': typeof OfficerDashboardRoute
   '/officer/notifications': typeof OfficerNotificationsRoute
   '/officer/rfqs': typeof OfficerRfqsRouteWithChildren
@@ -324,7 +476,9 @@ export interface FileRoutesById {
   '/vendor/profile': typeof VendorProfileRouteWithChildren
   '/vendor/quotations': typeof VendorQuotationsRouteWithChildren
   '/vendor/rfqs': typeof VendorRfqsRouteWithChildren
+  '/auditor/': typeof AuditorIndexRoute
   '/approver/compare/$rfqId': typeof ApproverCompareRfqIdRoute
+  '/head/escalation-review/$rfqId': typeof HeadEscalationReviewRfqIdRoute
   '/officer/rfqs/$id': typeof OfficerRfqsIdRoute
   '/officer/rfqs/create': typeof OfficerRfqsCreateRoute
   '/officer/vendors/$id': typeof OfficerVendorsIdRoute
@@ -332,6 +486,10 @@ export interface FileRoutesById {
   '/vendor/profile/complete': typeof VendorProfileCompleteRoute
   '/vendor/quotations/$id': typeof VendorQuotationsIdRoute
   '/vendor/rfqs/$id': typeof VendorRfqsIdRoute
+  '/officer/rfqs/': typeof OfficerRfqsIndexRoute
+  '/officer/vendors/': typeof OfficerVendorsIndexRoute
+  '/vendor/orders/': typeof VendorOrdersIndexRoute
+  '/vendor/rfqs/': typeof VendorRfqsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -350,6 +508,18 @@ export interface FileRouteTypes {
     | '/approver/history'
     | '/approver/notifications'
     | '/approver/pending'
+    | '/auditor/anomalies'
+    | '/auditor/audit-logs'
+    | '/auditor/notifications'
+    | '/auditor/overview'
+    | '/auditor/rfq-timeline'
+    | '/head/dashboard'
+    | '/head/escalations'
+    | '/head/rfqs'
+    | '/head/settings'
+    | '/head/team'
+    | '/head/vendors'
+    | '/head/verify-gstin'
     | '/officer/dashboard'
     | '/officer/notifications'
     | '/officer/rfqs'
@@ -363,7 +533,9 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/auditor/'
     | '/approver/compare/$rfqId'
+    | '/head/escalation-review/$rfqId'
     | '/officer/rfqs/$id'
     | '/officer/rfqs/create'
     | '/officer/vendors/$id'
@@ -371,11 +543,14 @@ export interface FileRouteTypes {
     | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
+    | '/officer/rfqs/'
+    | '/officer/vendors/'
+    | '/vendor/orders/'
+    | '/vendor/rfqs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/approver'
-    | '/auditor'
     | '/forgot-password'
     | '/head'
     | '/login'
@@ -387,20 +562,30 @@ export interface FileRouteTypes {
     | '/approver/history'
     | '/approver/notifications'
     | '/approver/pending'
+    | '/auditor/anomalies'
+    | '/auditor/audit-logs'
+    | '/auditor/notifications'
+    | '/auditor/overview'
+    | '/auditor/rfq-timeline'
+    | '/head/dashboard'
+    | '/head/escalations'
+    | '/head/rfqs'
+    | '/head/settings'
+    | '/head/team'
+    | '/head/vendors'
+    | '/head/verify-gstin'
     | '/officer/dashboard'
     | '/officer/notifications'
-    | '/officer/rfqs'
-    | '/officer/vendors'
     | '/signup/member'
     | '/signup/organization'
     | '/signup/vendor'
     | '/vendor/dashboard'
     | '/vendor/notifications'
-    | '/vendor/orders'
     | '/vendor/profile'
     | '/vendor/quotations'
-    | '/vendor/rfqs'
+    | '/auditor'
     | '/approver/compare/$rfqId'
+    | '/head/escalation-review/$rfqId'
     | '/officer/rfqs/$id'
     | '/officer/rfqs/create'
     | '/officer/vendors/$id'
@@ -408,6 +593,10 @@ export interface FileRouteTypes {
     | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
+    | '/officer/rfqs'
+    | '/officer/vendors'
+    | '/vendor/orders'
+    | '/vendor/rfqs'
   id:
     | '__root__'
     | '/'
@@ -424,6 +613,18 @@ export interface FileRouteTypes {
     | '/approver/history'
     | '/approver/notifications'
     | '/approver/pending'
+    | '/auditor/anomalies'
+    | '/auditor/audit-logs'
+    | '/auditor/notifications'
+    | '/auditor/overview'
+    | '/auditor/rfq-timeline'
+    | '/head/dashboard'
+    | '/head/escalations'
+    | '/head/rfqs'
+    | '/head/settings'
+    | '/head/team'
+    | '/head/vendors'
+    | '/head/verify-gstin'
     | '/officer/dashboard'
     | '/officer/notifications'
     | '/officer/rfqs'
@@ -437,7 +638,9 @@ export interface FileRouteTypes {
     | '/vendor/profile'
     | '/vendor/quotations'
     | '/vendor/rfqs'
+    | '/auditor/'
     | '/approver/compare/$rfqId'
+    | '/head/escalation-review/$rfqId'
     | '/officer/rfqs/$id'
     | '/officer/rfqs/create'
     | '/officer/vendors/$id'
@@ -445,14 +648,18 @@ export interface FileRouteTypes {
     | '/vendor/profile/complete'
     | '/vendor/quotations/$id'
     | '/vendor/rfqs/$id'
+    | '/officer/rfqs/'
+    | '/officer/vendors/'
+    | '/vendor/orders/'
+    | '/vendor/rfqs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApproverRoute: typeof ApproverRouteWithChildren
-  AuditorRoute: typeof AuditorRoute
+  AuditorRoute: typeof AuditorRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  HeadRoute: typeof HeadRoute
+  HeadRoute: typeof HeadRouteWithChildren
   LoginRoute: typeof LoginRoute
   OfficerRoute: typeof OfficerRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -526,6 +733,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/auditor/': {
+      id: '/auditor/'
+      path: '/'
+      fullPath: '/auditor/'
+      preLoaderRoute: typeof AuditorIndexRouteImport
+      parentRoute: typeof AuditorRoute
     }
     '/vendor/rfqs': {
       id: '/vendor/rfqs'
@@ -618,6 +832,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfficerDashboardRouteImport
       parentRoute: typeof OfficerRoute
     }
+    '/head/verify-gstin': {
+      id: '/head/verify-gstin'
+      path: '/verify-gstin'
+      fullPath: '/head/verify-gstin'
+      preLoaderRoute: typeof HeadVerifyGstinRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/head/vendors': {
+      id: '/head/vendors'
+      path: '/vendors'
+      fullPath: '/head/vendors'
+      preLoaderRoute: typeof HeadVendorsRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/head/team': {
+      id: '/head/team'
+      path: '/team'
+      fullPath: '/head/team'
+      preLoaderRoute: typeof HeadTeamRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/head/settings': {
+      id: '/head/settings'
+      path: '/settings'
+      fullPath: '/head/settings'
+      preLoaderRoute: typeof HeadSettingsRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/head/rfqs': {
+      id: '/head/rfqs'
+      path: '/rfqs'
+      fullPath: '/head/rfqs'
+      preLoaderRoute: typeof HeadRfqsRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/head/escalations': {
+      id: '/head/escalations'
+      path: '/escalations'
+      fullPath: '/head/escalations'
+      preLoaderRoute: typeof HeadEscalationsRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/head/dashboard': {
+      id: '/head/dashboard'
+      path: '/dashboard'
+      fullPath: '/head/dashboard'
+      preLoaderRoute: typeof HeadDashboardRouteImport
+      parentRoute: typeof HeadRoute
+    }
+    '/auditor/rfq-timeline': {
+      id: '/auditor/rfq-timeline'
+      path: '/rfq-timeline'
+      fullPath: '/auditor/rfq-timeline'
+      preLoaderRoute: typeof AuditorRfqTimelineRouteImport
+      parentRoute: typeof AuditorRoute
+    }
+    '/auditor/overview': {
+      id: '/auditor/overview'
+      path: '/overview'
+      fullPath: '/auditor/overview'
+      preLoaderRoute: typeof AuditorOverviewRouteImport
+      parentRoute: typeof AuditorRoute
+    }
+    '/auditor/notifications': {
+      id: '/auditor/notifications'
+      path: '/notifications'
+      fullPath: '/auditor/notifications'
+      preLoaderRoute: typeof AuditorNotificationsRouteImport
+      parentRoute: typeof AuditorRoute
+    }
+    '/auditor/audit-logs': {
+      id: '/auditor/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/auditor/audit-logs'
+      preLoaderRoute: typeof AuditorAuditLogsRouteImport
+      parentRoute: typeof AuditorRoute
+    }
+    '/auditor/anomalies': {
+      id: '/auditor/anomalies'
+      path: '/anomalies'
+      fullPath: '/auditor/anomalies'
+      preLoaderRoute: typeof AuditorAnomaliesRouteImport
+      parentRoute: typeof AuditorRoute
+    }
     '/approver/pending': {
       id: '/approver/pending'
       path: '/pending'
@@ -652,6 +950,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/approver/dashboard'
       preLoaderRoute: typeof ApproverDashboardRouteImport
       parentRoute: typeof ApproverRoute
+    }
+    '/vendor/rfqs/': {
+      id: '/vendor/rfqs/'
+      path: '/'
+      fullPath: '/vendor/rfqs/'
+      preLoaderRoute: typeof VendorRfqsIndexRouteImport
+      parentRoute: typeof VendorRfqsRoute
+    }
+    '/vendor/orders/': {
+      id: '/vendor/orders/'
+      path: '/'
+      fullPath: '/vendor/orders/'
+      preLoaderRoute: typeof VendorOrdersIndexRouteImport
+      parentRoute: typeof VendorOrdersRoute
+    }
+    '/officer/vendors/': {
+      id: '/officer/vendors/'
+      path: '/'
+      fullPath: '/officer/vendors/'
+      preLoaderRoute: typeof OfficerVendorsIndexRouteImport
+      parentRoute: typeof OfficerVendorsRoute
+    }
+    '/officer/rfqs/': {
+      id: '/officer/rfqs/'
+      path: '/'
+      fullPath: '/officer/rfqs/'
+      preLoaderRoute: typeof OfficerRfqsIndexRouteImport
+      parentRoute: typeof OfficerRfqsRoute
     }
     '/vendor/rfqs/$id': {
       id: '/vendor/rfqs/$id'
@@ -702,6 +1028,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfficerRfqsIdRouteImport
       parentRoute: typeof OfficerRfqsRoute
     }
+    '/head/escalation-review/$rfqId': {
+      id: '/head/escalation-review/$rfqId'
+      path: '/escalation-review/$rfqId'
+      fullPath: '/head/escalation-review/$rfqId'
+      preLoaderRoute: typeof HeadEscalationReviewRfqIdRouteImport
+      parentRoute: typeof HeadRoute
+    }
     '/approver/compare/$rfqId': {
       id: '/approver/compare/$rfqId'
       path: '/compare/$rfqId'
@@ -734,14 +1067,61 @@ const ApproverRouteWithChildren = ApproverRoute._addFileChildren(
   ApproverRouteChildren,
 )
 
+interface AuditorRouteChildren {
+  AuditorAnomaliesRoute: typeof AuditorAnomaliesRoute
+  AuditorAuditLogsRoute: typeof AuditorAuditLogsRoute
+  AuditorNotificationsRoute: typeof AuditorNotificationsRoute
+  AuditorOverviewRoute: typeof AuditorOverviewRoute
+  AuditorRfqTimelineRoute: typeof AuditorRfqTimelineRoute
+  AuditorIndexRoute: typeof AuditorIndexRoute
+}
+
+const AuditorRouteChildren: AuditorRouteChildren = {
+  AuditorAnomaliesRoute: AuditorAnomaliesRoute,
+  AuditorAuditLogsRoute: AuditorAuditLogsRoute,
+  AuditorNotificationsRoute: AuditorNotificationsRoute,
+  AuditorOverviewRoute: AuditorOverviewRoute,
+  AuditorRfqTimelineRoute: AuditorRfqTimelineRoute,
+  AuditorIndexRoute: AuditorIndexRoute,
+}
+
+const AuditorRouteWithChildren =
+  AuditorRoute._addFileChildren(AuditorRouteChildren)
+
+interface HeadRouteChildren {
+  HeadDashboardRoute: typeof HeadDashboardRoute
+  HeadEscalationsRoute: typeof HeadEscalationsRoute
+  HeadRfqsRoute: typeof HeadRfqsRoute
+  HeadSettingsRoute: typeof HeadSettingsRoute
+  HeadTeamRoute: typeof HeadTeamRoute
+  HeadVendorsRoute: typeof HeadVendorsRoute
+  HeadVerifyGstinRoute: typeof HeadVerifyGstinRoute
+  HeadEscalationReviewRfqIdRoute: typeof HeadEscalationReviewRfqIdRoute
+}
+
+const HeadRouteChildren: HeadRouteChildren = {
+  HeadDashboardRoute: HeadDashboardRoute,
+  HeadEscalationsRoute: HeadEscalationsRoute,
+  HeadRfqsRoute: HeadRfqsRoute,
+  HeadSettingsRoute: HeadSettingsRoute,
+  HeadTeamRoute: HeadTeamRoute,
+  HeadVendorsRoute: HeadVendorsRoute,
+  HeadVerifyGstinRoute: HeadVerifyGstinRoute,
+  HeadEscalationReviewRfqIdRoute: HeadEscalationReviewRfqIdRoute,
+}
+
+const HeadRouteWithChildren = HeadRoute._addFileChildren(HeadRouteChildren)
+
 interface OfficerRfqsRouteChildren {
   OfficerRfqsIdRoute: typeof OfficerRfqsIdRoute
   OfficerRfqsCreateRoute: typeof OfficerRfqsCreateRoute
+  OfficerRfqsIndexRoute: typeof OfficerRfqsIndexRoute
 }
 
 const OfficerRfqsRouteChildren: OfficerRfqsRouteChildren = {
   OfficerRfqsIdRoute: OfficerRfqsIdRoute,
   OfficerRfqsCreateRoute: OfficerRfqsCreateRoute,
+  OfficerRfqsIndexRoute: OfficerRfqsIndexRoute,
 }
 
 const OfficerRfqsRouteWithChildren = OfficerRfqsRoute._addFileChildren(
@@ -750,10 +1130,12 @@ const OfficerRfqsRouteWithChildren = OfficerRfqsRoute._addFileChildren(
 
 interface OfficerVendorsRouteChildren {
   OfficerVendorsIdRoute: typeof OfficerVendorsIdRoute
+  OfficerVendorsIndexRoute: typeof OfficerVendorsIndexRoute
 }
 
 const OfficerVendorsRouteChildren: OfficerVendorsRouteChildren = {
   OfficerVendorsIdRoute: OfficerVendorsIdRoute,
+  OfficerVendorsIndexRoute: OfficerVendorsIndexRoute,
 }
 
 const OfficerVendorsRouteWithChildren = OfficerVendorsRoute._addFileChildren(
@@ -779,10 +1161,12 @@ const OfficerRouteWithChildren =
 
 interface VendorOrdersRouteChildren {
   VendorOrdersIdRoute: typeof VendorOrdersIdRoute
+  VendorOrdersIndexRoute: typeof VendorOrdersIndexRoute
 }
 
 const VendorOrdersRouteChildren: VendorOrdersRouteChildren = {
   VendorOrdersIdRoute: VendorOrdersIdRoute,
+  VendorOrdersIndexRoute: VendorOrdersIndexRoute,
 }
 
 const VendorOrdersRouteWithChildren = VendorOrdersRoute._addFileChildren(
@@ -814,10 +1198,12 @@ const VendorQuotationsRouteWithChildren =
 
 interface VendorRfqsRouteChildren {
   VendorRfqsIdRoute: typeof VendorRfqsIdRoute
+  VendorRfqsIndexRoute: typeof VendorRfqsIndexRoute
 }
 
 const VendorRfqsRouteChildren: VendorRfqsRouteChildren = {
   VendorRfqsIdRoute: VendorRfqsIdRoute,
+  VendorRfqsIndexRoute: VendorRfqsIndexRoute,
 }
 
 const VendorRfqsRouteWithChildren = VendorRfqsRoute._addFileChildren(
@@ -848,9 +1234,9 @@ const VendorRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApproverRoute: ApproverRouteWithChildren,
-  AuditorRoute: AuditorRoute,
+  AuditorRoute: AuditorRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  HeadRoute: HeadRoute,
+  HeadRoute: HeadRouteWithChildren,
   LoginRoute: LoginRoute,
   OfficerRoute: OfficerRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,

@@ -7,7 +7,7 @@ export function StubPage({ title, subtitle, children }: { title: string; subtitl
   return (
     <div>
       <PageHeader title={title} subtitle={subtitle} />
-      {children ?? <EmptyState icon={Construction} title="Coming up next" body="This page is part of the platform and will populate with live data once your team starts using ProcureBase." />}
+      {children ?? <EmptyState icon={Construction} title="Coming up next" body="This page is part of the platform and will populate with live data once your team starts using ProcuBase." />}
     </div>
   );
 }

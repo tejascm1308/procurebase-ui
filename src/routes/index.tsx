@@ -4,9 +4,9 @@ import { ArrowRight, Briefcase, ShieldCheck, Sparkles, FileSearch, Users, Star, 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ProcureBase — The Enterprise Procurement Platform" },
+      { title: "ProcuBase — The Enterprise Procurement Platform" },
       { name: "description", content: "Vendor onboarding, RFQ management, multi-role approvals, AI quote scoring, and complete audit compliance — in one secure platform." },
-      { property: "og:title", content: "ProcureBase — Enterprise Procurement Platform" },
+      { property: "og:title", content: "ProcuBase — Enterprise Procurement Platform" },
       { property: "og:description", content: "The backbone of enterprise procurement: RFQs, AI scoring, approvals, and audit trails." },
     ],
   }),
@@ -19,9 +19,8 @@ function Landing() {
       {/* Nav */}
       <header className="sticky top-0 z-30 border-b bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary text-white font-bold">P</div>
-            <span className="text-base font-bold text-heading tracking-tight">ProcureBase</span>
+          <Link to="/" className="flex items-center">
+            <span className="text-[18px] font-bold" style={{ color: '#0A2540', letterSpacing: '-0.03em' }}>Procu<span style={{ color: '#635BFF' }}>Base</span></span>
           </Link>
           <nav className="hidden items-center gap-8 md:flex">
             <a href="#features" className="text-sm font-medium text-body hover:text-heading">Features</a>
@@ -178,9 +177,8 @@ function Landing() {
       <footer className="border-t bg-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-8">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-primary text-white font-bold text-xs">P</div>
-            <span className="text-sm font-bold text-heading">ProcureBase</span>
-            <span className="text-xs text-mute ml-2">© 2026 ProcureBase Inc.</span>
+            <span className="text-[16px] font-bold" style={{ color: '#0A2540', letterSpacing: '-0.03em' }}>Procu<span style={{ color: '#635BFF' }}>Base</span></span>
+            <span className="text-xs text-mute ml-2">© 2026 ProcuBase Inc.</span>
           </div>
           <div className="flex flex-wrap gap-6 text-xs text-body">
             <a href="#" className="hover:text-heading">Privacy</a>
@@ -204,7 +202,8 @@ function DashboardPreview() {
             <div className="h-2 w-2 rounded-full bg-[#FF6058]" />
             <div className="h-2 w-2 rounded-full bg-[#FFBD2E]" />
             <div className="h-2 w-2 rounded-full bg-[#28C941]" />
-            <p className="ml-3 text-xs font-medium text-mute">app.procurebase.com/dashboard</p>
+            <p className="ml-3 text-xs font-medium text-mute">app.procubase.com/dashboard</p>
+
           </div>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-3">

@@ -1,4 +1,4 @@
-import type { Status } from "@/lib/mock-data";
+// Status is a plain string — no type import needed
 
 const STATUS_STYLES: Record<string, { bg: string; fg: string; border: string; label?: string }> = {
   REGISTERED: { bg: "#F1F5F9", fg: "#475569", border: "#CBD5E1" },
@@ -24,7 +24,7 @@ const STATUS_STYLES: Record<string, { bg: string; fg: string; border: string; la
   WITHDRAWN: { bg: "#F3F4F6", fg: "#4B5563", border: "#D1D5DB" },
 };
 
-export function StatusBadge({ status, className = "" }: { status: Status | string; className?: string }) {
+export function StatusBadge({ status, className = "" }: { status: string; className?: string }) {
   const s = STATUS_STYLES[status] ?? STATUS_STYLES.DRAFT;
   return (
     <span

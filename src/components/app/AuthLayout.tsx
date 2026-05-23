@@ -7,9 +7,8 @@ export function AuthLayout({ title, subtitle, children, footer }: { title: strin
     <div className="grid min-h-screen bg-white lg:grid-cols-2">
       {/* Left panel */}
       <div className="hidden bg-gradient-soft lg:flex lg:flex-col lg:justify-between lg:p-12">
-        <Link to="/" className="inline-flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary text-white font-bold">P</div>
-          <span className="text-lg font-bold text-heading">ProcureBase</span>
+        <Link to="/" className="inline-flex items-center">
+          <span className="text-[20px] font-bold" style={{ color: '#0A2540', letterSpacing: '-0.03em' }}>Procu<span style={{ color: '#635BFF' }}>Base</span></span>
         </Link>
         <div>
           <p className="label-tiny">The platform</p>
@@ -33,15 +32,14 @@ export function AuthLayout({ title, subtitle, children, footer }: { title: strin
             ))}
           </ul>
         </div>
-        <p className="text-xs text-mute">© 2026 ProcureBase Inc. All rights reserved.</p>
+        <p className="text-xs text-mute">© 2026 ProcuBase Inc. All rights reserved.</p>
       </div>
 
       {/* Right panel — form */}
       <div className="flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-md">
-          <Link to="/" className="mb-6 inline-flex items-center gap-2 lg:hidden">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary text-white font-bold">P</div>
-            <span className="text-base font-bold text-heading">ProcureBase</span>
+          <Link to="/" className="mb-6 inline-flex items-center lg:hidden">
+            <span className="text-[20px] font-bold" style={{ color: '#0A2540', letterSpacing: '-0.03em' }}>Procu<span style={{ color: '#635BFF' }}>Base</span></span>
           </Link>
           <div className="rounded-2xl border bg-card p-8 shadow-card">
             <h1 className="text-2xl font-bold tracking-tight text-heading">{title}</h1>

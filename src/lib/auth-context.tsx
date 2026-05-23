@@ -1,8 +1,16 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import type { Role } from "./mock-data";
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { api } from "./api";
+
+export type Role = "vendor" | "officer" | "approver" | "head" | "auditor";
 
 export interface AuthUser {
-  id: string; name: string; email: string; role: Role; orgId?: string; vendorId?: string;
+  id: string;
+  email: string;
+  full_name: string;
+  role: Role;
+  org_id?: string;
+  vendor_id?: string;
+  is_active?: boolean;
 }
 
 interface AuthContextType {
@@ -10,52 +18,68 @@ interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string, role: Role) => Promise<AuthUser>;
+  login: (email: string, password: string) => Promise<AuthUser>;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const MOCK_USERS: Record<Role, AuthUser> = {
-  vendor: { id: "VND-001", name: "Rajesh Khanna", email: "rajesh@apexsupplies.in", role: "vendor", vendorId: "VND-001" },
-  officer: { id: "USR-101", name: "Priya Sharma", email: "priya@techcorp.in", role: "officer", orgId: "ORG-001" },
-  approver: { id: "USR-102", name: "Anita Desai", email: "anita@techcorp.in", role: "approver", orgId: "ORG-001" },
-  head: { id: "USR-103", name: "Vikram Mehta", email: "vikram@techcorp.in", role: "head", orgId: "ORG-001" },
-  auditor: { id: "USR-104", name: "Sanjay Iyer", email: "sanjay@techcorp.in", role: "auditor", orgId: "ORG-001" },
+const SESSION_KEY = "procurebase.session";
+
+// Role → dashboard route mapping (used by login page)
+export const roleDashboards: Record<Role, string> = {
+  vendor:   "/vendor/dashboard",
+  officer:  "/officer/dashboard",
+  approver: "/approver/dashboard",
+  head:     "/head/dashboard",
+  auditor:  "/auditor",
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [user, setUser]       = useState<AuthUser | null>(null);
+  const [token, setToken]     = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // ─── Restore session from localStorage ────────────────────────────
   useEffect(() => {
     if (typeof window === "undefined") { setIsLoading(false); return; }
     try {
-      const stored = window.localStorage.getItem("procurebase.session");
+      const stored = window.localStorage.getItem(SESSION_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        setUser(parsed.user); setToken(parsed.token);
+        setUser(parsed.user);
+        setToken(parsed.token);
       }
-    } catch {}
+    } catch { /* ignore */ }
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, _password: string, role: Role) => {
-    await new Promise((r) => setTimeout(r, 600));
-    const u: AuthUser = { ...MOCK_USERS[role], email: email || MOCK_USERS[role].email };
-    const t = "mock.jwt." + Math.random().toString(36).slice(2);
-    setUser(u); setToken(t);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("procurebase.session", JSON.stringify({ user: u, token: t }));
-    }
-    return u;
-  };
+  // ─── Listen for global 401 → auto logout ──────────────────────────
+  useEffect(() => {
+    const handleExpired = () => { setUser(null); setToken(null); window.localStorage.removeItem(SESSION_KEY); };
+    window.addEventListener("auth:expired", handleExpired);
+    return () => window.removeEventListener("auth:expired", handleExpired);
+  }, []);
 
-  const logout = () => {
-    setUser(null); setToken(null);
-    if (typeof window !== "undefined") window.localStorage.removeItem("procurebase.session");
-  };
+  // ─── Login ────────────────────────────────────────────────────────
+  const login = useCallback(async (email: string, password: string): Promise<AuthUser> => {
+    const res = await api.post<{ token: string; user: AuthUser }>("/api/auth/login", { email, password });
+    setUser(res.user);
+    setToken(res.token);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(SESSION_KEY, JSON.stringify({ user: res.user, token: res.token }));
+    }
+    return res.user;
+  }, []);
+
+  // ─── Logout ───────────────────────────────────────────────────────
+  const logout = useCallback(() => {
+    // Fire-and-forget backend logout (audit log)
+    api.post("/api/auth/logout").catch(() => {});
+    setUser(null);
+    setToken(null);
+    if (typeof window !== "undefined") window.localStorage.removeItem(SESSION_KEY);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, token, isAuthenticated: !!user, isLoading, login, logout }}>

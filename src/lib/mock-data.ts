@@ -110,5 +110,5 @@ export const roleDashboards: Record<Role, string> = {
   officer: "/officer/dashboard",
   approver: "/approver/dashboard",
   head: "/head/dashboard",
-  auditor: "/auditor/dashboard",
+  auditor: "/auditor",
 };

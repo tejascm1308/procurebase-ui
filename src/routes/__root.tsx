@@ -45,7 +45,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ProcureBase — Enterprise Procurement Platform" },
+      { title: "ProcuBase — Enterprise Procurement Platform" },
       { name: "description", content: "Streamline vendor onboarding, RFQ management, multi-role approvals, and audit compliance in one secure procurement platform." },
     ],
     links: [
